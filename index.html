@@ -16,6 +16,13 @@
   html { font-size: 16px; }
   body { background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; min-height: 100vh; padding-bottom: 3rem; }
 
+  /* ── SYNC STATUS ── */
+  #sync-bar { display:flex; align-items:center; gap:0.5rem; padding:0.4rem 2rem; font-family:'DM Mono',monospace; font-size:0.7rem; background:var(--ink); color:#9a9585; }
+  #sync-dot { width:7px; height:7px; border-radius:50%; background:#9a9585; flex-shrink:0; transition:background 0.3s; }
+  #sync-dot.syncing { background:#c5960a; }
+  #sync-dot.synced  { background:#3a7d5a; }
+  #sync-dot.error   { background:#c9553a; }
+
   header { background: var(--ink); color: var(--paper); padding: 1.5rem 2rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
   header h1 { font-family: 'Fraunces', serif; font-weight: 300; font-size: 2rem; letter-spacing: -0.02em; flex: 1; }
   header h1 em { font-style: italic; color: #c9aa8c; }
@@ -30,16 +37,13 @@
   .tab-panel.active { display: block; }
   .section-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
 
-  /* ── SUB-TABS (shared) ── */
   .sub-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; }
   .sub-tab-btn { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; padding: 0.45rem 1rem; border-radius: 20px; border: 1.5px solid var(--border); background: none; color: var(--muted); cursor: pointer; transition: all 0.15s; }
   .sub-tab-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
-  /* ── MONTH NAV ── */
   .month-nav { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
   .month-nav span { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 300; flex: 1; text-align: center; }
 
-  /* ── BUDGET RING ROW ── */
   .budget-ring-row { display: flex; gap: 2rem; align-items: center; background: var(--ink); color: var(--paper); border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
   .ring-wrap { position: relative; width: 100px; height: 100px; flex-shrink: 0; }
   .ring-wrap svg { transform: rotate(-90deg); }
@@ -55,7 +59,6 @@
   .meta-val { font-family: 'Fraunces', serif; font-size: 1.2rem; }
   .meta-lbl { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: #9a9585; letter-spacing: 0.08em; }
 
-  /* ── FORMS ── */
   .add-row { display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 0.75rem; margin-bottom: 1.5rem; align-items: end; }
   @media (max-width: 600px) { .add-row { grid-template-columns: 1fr 1fr; } }
   .field { display: flex; flex-direction: column; gap: 0.3rem; }
@@ -67,7 +70,6 @@
   .btn-primary { background: var(--accent); color: #fff; }
   .btn-ghost { background: var(--warm-mid); color: var(--ink); }
 
-  /* ── EXPENSE LIST ── */
   .expense-list { display: flex; flex-direction: column; gap: 0.5rem; }
   .expense-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1rem; background: #fff; border-radius: 8px; border: 1.5px solid var(--border); transition: border-color 0.15s; }
   .expense-item:hover { border-color: var(--accent-soft); }
@@ -79,7 +81,6 @@
   .del-btn { background: none; border: none; cursor: pointer; color: var(--muted); font-size: 1rem; padding: 0.1rem 0.3rem; border-radius: 4px; transition: color 0.15s; }
   .del-btn:hover { color: var(--accent); }
 
-  /* ── CAT BARS ── */
   .cat-breakdown { margin-top: 2rem; }
   .cat-bar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
   .cat-bar-label { font-family: 'DM Mono', monospace; font-size: 0.72rem; width: 90px; color: var(--ink); }
@@ -87,7 +88,6 @@
   .cat-bar-fill { height: 100%; border-radius: 10px; transition: width 0.4s ease; }
   .cat-bar-amt { font-family: 'DM Mono', monospace; font-size: 0.7rem; width: 70px; text-align: right; color: var(--muted); }
 
-  /* ── MONTHLY OVERVIEW (spending) ── */
   .overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
   .month-card { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
   .month-card:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(201,85,58,0.08); }
@@ -99,17 +99,14 @@
   .month-card-bar-fill { height: 100%; border-radius: 10px; background: var(--accent); transition: width 0.4s; }
   .month-card-bar-fill.over { background: #b03020; }
 
-  /* ── ANNUAL BAR CHART (shared) ── */
   .annual-chart { display: flex; align-items: flex-end; gap: 0.5rem; height: 120px; margin-bottom: 0.5rem; }
   .annual-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; height: 100%; justify-content: flex-end; cursor: pointer; }
   .annual-bar { width: 100%; border-radius: 4px 4px 0 0; background: var(--warm-mid); border: 1.5px solid var(--border); transition: background 0.15s; min-height: 3px; }
   .annual-bar.has-data { background: var(--accent); border-color: var(--accent); }
   .annual-bar.active-bar { background: var(--ink); border-color: var(--ink); }
-  /* schedule bars use green */
   .annual-bar.has-data.sched { background: var(--green); border-color: var(--green); }
   .annual-bar.active-bar.sched { background: var(--ink); border-color: var(--ink); }
 
-  /* ── WEEK GRID ── */
   .week-nav { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
   .week-nav span { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 300; flex: 1; text-align: center; }
   .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.5rem; margin-bottom: 2rem; }
@@ -120,7 +117,6 @@
   .day-header.today .day-num-wrap { background: var(--accent); color: #fff; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; margin-top: 0.2rem; }
   .day-header.today span { color: #fff; }
 
-  /* ── EVENT BLOCKS — 10 colours ── */
   .event-block { border-left: 3px solid; border-radius: 4px; padding: 0.3rem 0.4rem; font-size: 0.7rem; line-height: 1.3; cursor: pointer; transition: opacity 0.15s; word-break: break-word; }
   .event-block:hover { opacity: 0.75; }
   .event-block .ev-time { font-family: 'DM Mono', monospace; font-size: 0.62rem; }
@@ -135,13 +131,11 @@
   .ev-indigo  { background:#dde0f5; border-color:#4a55b5; } .ev-indigo  .ev-time { color:#4a55b5; }
   .ev-rose    { background:#f5dde0; border-color:#b54a55; } .ev-rose    .ev-time { color:#b54a55; }
 
-  /* colour swatches in the form */
   .color-picker { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; }
   .color-swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: transform 0.12s, border-color 0.12s; flex-shrink: 0; }
   .color-swatch:hover { transform: scale(1.15); }
   .color-swatch.selected { border-color: var(--ink); transform: scale(1.18); }
 
-  /* ── SCHEDULE OVERVIEW CARDS ── */
   .sched-overview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
   .sched-month-card { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 1rem 1.2rem; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
   .sched-month-card:hover { border-color: var(--green); box-shadow: 0 2px 8px rgba(58,125,90,0.1); }
@@ -149,20 +143,36 @@
   .sched-month-card-name { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 300; margin-bottom: 0.4rem; }
   .sched-month-card-count { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; color: var(--green); }
   .sched-month-card-meta { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); margin-top: 0.3rem; }
-  /* colour pips on card */
   .sched-card-pips { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 0.6rem; }
   .sched-pip { width: 8px; height: 8px; border-radius: 50%; }
 
-  /* add event form */
   .add-event-form { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 1.25rem; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.75rem; align-items: end; margin-bottom: 2rem; }
   @media (max-width: 700px) { .add-event-form { grid-template-columns: 1fr 1fr; } }
 
   .empty { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem; }
   .empty span { display: block; font-size: 2rem; margin-bottom: 0.5rem; }
   .divider { border: none; border-top: 1.5px solid var(--border); margin: 1.5rem 0; }
+
+  /* loading overlay */
+  #loading-overlay { position:fixed; inset:0; background:var(--ink); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:999; gap:1rem; transition:opacity 0.4s; }
+  #loading-overlay h2 { font-family:'Fraunces',serif; font-weight:300; color:var(--paper); font-size:1.5rem; }
+  #loading-overlay p  { font-family:'DM Mono',monospace; font-size:0.75rem; color:#9a9585; }
+  .spinner { width:36px; height:36px; border:3px solid #3a3a55; border-top-color:#c9aa8c; border-radius:50%; animation:spin 0.8s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
 </style>
 </head>
 <body>
+
+<div id="loading-overlay">
+  <div class="spinner"></div>
+  <h2>My <em style="font-style:italic;color:#c9aa8c;">Dashboard</em></h2>
+  <p id="loading-msg">Connecting to cloud…</p>
+</div>
+
+<div id="sync-bar">
+  <div id="sync-dot"></div>
+  <span id="sync-text">Connecting…</span>
+</div>
 
 <header>
   <h1>My <em>Dashboard</em></h1>
@@ -174,16 +184,12 @@
   <button class="tab-btn" onclick="switchTab('schedule')">📅 Schedule</button>
 </nav>
 
-<!-- ═══════════════════════════════
-     SPENDING TAB
-════════════════════════════════ -->
+<!-- ═══ SPENDING TAB ═══ -->
 <div id="tab-spending" class="tab-panel active">
   <div class="sub-tabs">
     <button class="sub-tab-btn active" onclick="switchSpendSubTab('month')">This Month</button>
     <button class="sub-tab-btn" onclick="switchSpendSubTab('overview')">All Months</button>
   </div>
-
-  <!-- Month view -->
   <div id="spend-sub-month">
     <div class="month-nav">
       <button class="btn btn-ghost" onclick="changeMonth(-1)">← Prev</button>
@@ -210,7 +216,7 @@
       </div>
     </div>
     <div class="section-label">Budget for this month</div>
-    <div class="add-row" style="max-width:380px; margin-bottom:2rem;">
+    <div class="add-row" style="max-width:380px;margin-bottom:2rem;">
       <div class="field">
         <label>CURRENCY</label>
         <select id="currency-select" onchange="saveCurrency()">
@@ -240,8 +246,6 @@
     <div class="expense-list" id="expense-list"></div>
     <div class="cat-breakdown" id="cat-breakdown"></div>
   </div>
-
-  <!-- Overview view -->
   <div id="spend-sub-overview" style="display:none;">
     <div class="section-label">Spending by Month</div>
     <div class="annual-chart" id="spend-annual-chart"></div>
@@ -254,7 +258,7 @@
     <div class="budget-ring-row" style="margin-bottom:0;">
       <div class="budget-summary">
         <h2 id="all-time-total"><em>฿0</em></h2>
-        <p id="all-time-sub">across all recorded months</p>
+        <p>across all recorded months</p>
       </div>
       <div class="budget-meta">
         <div class="meta-item"><span class="meta-val" id="ov-months">0</span><span class="meta-lbl">MONTHS</span></div>
@@ -265,16 +269,12 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════
-     SCHEDULE TAB
-════════════════════════════════ -->
+<!-- ═══ SCHEDULE TAB ═══ -->
 <div id="tab-schedule" class="tab-panel">
   <div class="sub-tabs">
     <button class="sub-tab-btn active" onclick="switchSchedSubTab('week')">This Week</button>
     <button class="sub-tab-btn" onclick="switchSchedSubTab('overview')">All Months</button>
   </div>
-
-  <!-- Week view -->
   <div id="sched-sub-week">
     <div class="week-nav">
       <button class="btn btn-ghost" onclick="changeWeek(-1)">← Prev</button>
@@ -297,8 +297,6 @@
       <button class="btn btn-ghost" onclick="clearEvents()">Clear All</button>
     </div>
   </div>
-
-  <!-- Schedule Overview -->
   <div id="sched-sub-overview" style="display:none;">
     <div class="section-label">Events by Month</div>
     <div class="annual-chart" id="sched-annual-chart"></div>
@@ -310,7 +308,7 @@
     <div class="section-label">Total across all time</div>
     <div class="budget-ring-row" style="margin-bottom:0;">
       <div class="budget-summary">
-        <h2 id="sched-all-total" style="font-family:'Fraunces',serif;font-weight:300;font-size:1.6rem;"><em style="font-style:italic;color:#c9aa8c;">0</em> events</h2>
+        <h2 id="sched-all-total"><em style="font-style:italic;color:#c9aa8c;">0</em> events</h2>
         <p style="font-size:0.82rem;color:#9a9585;margin-top:0.25rem;">across all recorded months</p>
       </div>
       <div class="budget-meta">
@@ -322,116 +320,233 @@
   </div>
 </div>
 
-<script>
-// ── UTILITIES ──
-const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
-const load = (k, d) => { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : d; } catch { return d; } };
-const currency = () => load('currency', '฿');
-const fmt = (n) => `${currency()}${Number(n).toLocaleString('en', {minimumFractionDigits:0, maximumFractionDigits:0})}`;
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp }                              from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc,
+         onSnapshot, collection, deleteDoc,
+         writeBatch }                                 from "https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
+
+// ── FIREBASE CONFIG ──
+const firebaseConfig = {
+  apiKey:            "AIzaSyDAvZAH8ksrWVl2fx7qdQYqyOVkd9ztNhI",
+  authDomain:        "ptwc-faca6.firebaseapp.com",
+  projectId:         "ptwc-faca6",
+  storageBucket:     "ptwc-faca6.firebasestorage.app",
+  messagingSenderId: "645074248828",
+  appId:             "1:645074248828:web:63737f7f9ddfe9cea155f9",
+  measurementId:     "G-YD3CVLCX9D"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+// ── SYNC UI ──
+function setSyncStatus(state, msg) {
+  const dot  = document.getElementById('sync-dot');
+  const text = document.getElementById('sync-text');
+  dot.className = 'sync-dot ' + state; // syncing | synced | error
+  dot.id = 'sync-dot'; // keep id
+  dot.style.background = state==='synced'?'#3a7d5a': state==='syncing'?'#c5960a':'#c9553a';
+  text.textContent = msg;
+}
+
+// ── CONSTANTS ──
+const MONTHS       = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-
-const CAT_COLORS = {
-  Food:'#c9553a', Transport:'#4a80b5', Housing:'#3a7d5a',
-  Health:'#8a6daa', Shopping:'#c5960a', Entertainment:'#c9aa8c', Other:'#8a8580'
+const CAT_COLORS   = { Food:'#c9553a', Transport:'#4a80b5', Housing:'#3a7d5a', Health:'#8a6daa', Shopping:'#c5960a', Entertainment:'#c9aa8c', Other:'#8a8580' };
+const EV_COLORS    = {
+  green:{bg:'#d9ede5',border:'#3a7d5a',hex:'#3a7d5a',label:'Green'},
+  red:{bg:'#f0e0db',border:'#c9553a',hex:'#c9553a',label:'Red'},
+  blue:{bg:'#dce8f5',border:'#4a80b5',hex:'#4a80b5',label:'Blue'},
+  yellow:{bg:'#fdf3d9',border:'#c5960a',hex:'#c5960a',label:'Yellow'},
+  purple:{bg:'#ede0f5',border:'#8a4fbb',hex:'#8a4fbb',label:'Purple'},
+  pink:{bg:'#fde0ee',border:'#c9508a',hex:'#c9508a',label:'Pink'},
+  orange:{bg:'#fdebd9',border:'#d4702a',hex:'#d4702a',label:'Orange'},
+  teal:{bg:'#d9f0ef',border:'#2a9a94',hex:'#2a9a94',label:'Teal'},
+  indigo:{bg:'#dde0f5',border:'#4a55b5',hex:'#4a55b5',label:'Indigo'},
+  rose:{bg:'#f5dde0',border:'#b54a55',hex:'#b54a55',label:'Rose'},
 };
 
-// 10 event colours
-const EV_COLORS = {
-  green:  { bg:'#d9ede5', border:'#3a7d5a', hex:'#3a7d5a', label:'Green' },
-  red:    { bg:'#f0e0db', border:'#c9553a', hex:'#c9553a', label:'Red' },
-  blue:   { bg:'#dce8f5', border:'#4a80b5', hex:'#4a80b5', label:'Blue' },
-  yellow: { bg:'#fdf3d9', border:'#c5960a', hex:'#c5960a', label:'Yellow' },
-  purple: { bg:'#ede0f5', border:'#8a4fbb', hex:'#8a4fbb', label:'Purple' },
-  pink:   { bg:'#fde0ee', border:'#c9508a', hex:'#c9508a', label:'Pink' },
-  orange: { bg:'#fdebd9', border:'#d4702a', hex:'#d4702a', label:'Orange' },
-  teal:   { bg:'#d9f0ef', border:'#2a9a94', hex:'#2a9a94', label:'Teal' },
-  indigo: { bg:'#dde0f5', border:'#4a55b5', hex:'#4a55b5', label:'Indigo' },
-  rose:   { bg:'#f5dde0', border:'#b54a55', hex:'#b54a55', label:'Rose' },
-};
+// ── LOCAL STATE (kept in sync with Firestore) ──
+let expenses = [];
+let budgets  = {};
+let events   = [];
+let settings = { currency: '฿' };
+
+const now = new Date();
+let viewYear = now.getFullYear(), viewMonth = now.getMonth();
+let weekOffset = 0;
+let selectedColor = 'green';
+
+// ── FIRESTORE HELPERS ──
+const userDoc  = (path) => doc(db, 'dashboard', path);
+
+async function fbSet(path, data) {
+  setSyncStatus('syncing', 'Saving…');
+  try {
+    await setDoc(userDoc(path), data);
+    setSyncStatus('synced', 'All changes saved');
+  } catch(e) {
+    setSyncStatus('error', 'Save failed — check connection');
+    console.error(e);
+  }
+}
+
+// ── REAL-TIME LISTENERS ──
+function startListeners() {
+  // expenses
+  onSnapshot(userDoc('expenses'), snap => {
+    expenses = snap.exists() ? (snap.data().list || []) : [];
+    refreshMonthView();
+    setSyncStatus('synced', 'Up to date');
+  });
+  // budgets
+  onSnapshot(userDoc('budgets'), snap => {
+    budgets = snap.exists() ? (snap.data().map || {}) : {};
+    refreshMonthView();
+  });
+  // events
+  onSnapshot(userDoc('events'), snap => {
+    events = snap.exists() ? (snap.data().list || []) : [];
+    renderSchedule();
+  });
+  // settings
+  onSnapshot(userDoc('settings'), snap => {
+    if (snap.exists()) {
+      settings = snap.data();
+      document.getElementById('currency-select').value = settings.currency || '฿';
+    }
+  });
+}
+
+// ── INITIAL LOAD ──
+async function init() {
+  document.getElementById('loading-msg').textContent = 'Loading your data…';
+  try {
+    const [expSnap, budSnap, evSnap, setSnap] = await Promise.all([
+      getDoc(userDoc('expenses')),
+      getDoc(userDoc('budgets')),
+      getDoc(userDoc('events')),
+      getDoc(userDoc('settings')),
+    ]);
+    expenses = expSnap.exists() ? (expSnap.data().list || []) : [];
+    budgets  = budSnap.exists()  ? (budSnap.data().map  || {}) : {};
+    settings = setSnap.exists()  ? setSnap.data() : { currency: '฿' };
+
+    // Seed schedule if first time
+    let evList = evSnap.exists() ? (evSnap.data().list || []) : [];
+    if (!evSnap.exists() || evList.length === 0) {
+      evList = seedSchedule();
+      await fbSet('events', { list: evList });
+    }
+    events = evList;
+
+    document.getElementById('currency-select').value = settings.currency || '฿';
+    startListeners();
+    hideLoading();
+    refreshMonthView();
+    renderSchedule();
+    buildColorPicker();
+  } catch(e) {
+    document.getElementById('loading-msg').textContent = 'Connection error — check Firestore rules';
+    setSyncStatus('error', 'Connection failed');
+    console.error(e);
+  }
+}
+
+function hideLoading() {
+  const ol = document.getElementById('loading-overlay');
+  ol.style.opacity = '0';
+  setTimeout(() => ol.style.display = 'none', 400);
+}
+
+// ── UTILITIES ──
+const currency = () => settings.currency || '฿';
+const fmt = (n) => `${currency()}${Number(n).toLocaleString('en', {minimumFractionDigits:0,maximumFractionDigits:0})}`;
+function monthKey(y, m) { return `${y}-${String(m+1).padStart(2,'0')}`; }
+function currentKey()   { return monthKey(viewYear, viewMonth); }
+function monthExpenses(y, m) { return expenses.filter(e => e.date?.startsWith(monthKey(y,m))); }
+function isoDate(d) { return d.toISOString().slice(0,10); }
 
 // ── DATE HEADER ──
 const updateDate = () => {
-  const d = new Date();
   document.getElementById('live-date').textContent =
-    d.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    new Date().toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
 };
 updateDate(); setInterval(updateDate, 60000);
 
-// ── TOP TABS ──
+// ── TABS ──
 function switchTab(name) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
-  document.querySelectorAll('.tab-btn')[name === 'spending' ? 0 : 1].classList.add('active');
+  document.querySelectorAll('.tab-btn')[name==='spending'?0:1].classList.add('active');
 }
+window.switchTab = switchTab;
 
 // ══════════════════════════════
 //  SPENDING
 // ══════════════════════════════
-let expenses = load('expenses', []);
-let budgets  = load('budgets', {});
-const now = new Date();
-let viewYear = now.getFullYear(), viewMonth = now.getMonth();
-
-function monthKey(y, m) { return `${y}-${String(m+1).padStart(2,'0')}`; }
-function currentKey()   { return monthKey(viewYear, viewMonth); }
-function monthExpenses(y, m) { const k = monthKey(y,m); return expenses.filter(e => e.date?.startsWith(k)); }
-
-function switchSpendSubTab(name) {
-  const btns = document.querySelectorAll('#tab-spending .sub-tab-btn');
-  btns.forEach((b,i) => b.classList.toggle('active', (i===0&&name==='month')||(i===1&&name==='overview')));
-  document.getElementById('spend-sub-month').style.display    = name==='month'    ? '' : 'none';
-  document.getElementById('spend-sub-overview').style.display = name==='overview' ? '' : 'none';
+window.switchSpendSubTab = function(name) {
+  document.querySelectorAll('#tab-spending .sub-tab-btn').forEach((b,i) =>
+    b.classList.toggle('active', (i===0&&name==='month')||(i===1&&name==='overview')));
+  document.getElementById('spend-sub-month').style.display    = name==='month'    ? '':'none';
+  document.getElementById('spend-sub-overview').style.display = name==='overview' ? '':'none';
   if (name === 'overview') renderSpendOverview();
-}
+};
 
-function changeMonth(dir) {
+window.changeMonth = function(dir) {
   viewMonth += dir;
-  if (viewMonth > 11) { viewMonth = 0; viewYear++; }
-  if (viewMonth < 0)  { viewMonth = 11; viewYear--; }
+  if (viewMonth > 11) { viewMonth=0; viewYear++; }
+  if (viewMonth <  0) { viewMonth=11; viewYear--; }
   refreshMonthView();
-}
+};
 
-function saveCurrency() { save('currency', document.getElementById('currency-select').value); refreshMonthView(); }
-function saveBudget() {
+window.saveCurrency = async function() {
+  settings.currency = document.getElementById('currency-select').value;
+  await fbSet('settings', settings);
+  refreshMonthView();
+};
+
+window.saveBudget = async function() {
   budgets[currentKey()] = parseFloat(document.getElementById('budget-input').value) || 0;
-  save('budgets', budgets); refreshMonthView();
-}
+  await fbSet('budgets', { map: budgets });
+  refreshMonthView();
+};
 
-function addExpense() {
+window.addExpense = async function() {
   const name = document.getElementById('exp-name').value.trim();
   const amt  = parseFloat(document.getElementById('exp-amt').value);
   const cat  = document.getElementById('exp-cat').value;
-  const date = document.getElementById('exp-date').value || new Date().toISOString().slice(0,10);
+  const date = document.getElementById('exp-date').value || isoDate(new Date());
   if (!name || !amt) return;
   expenses.push({ id: Date.now(), name, amt, cat, date });
-  save('expenses', expenses);
   document.getElementById('exp-name').value = '';
   document.getElementById('exp-amt').value  = '';
-  document.getElementById('exp-date').value = `${viewYear}-${String(viewMonth+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
-  refreshMonthView();
-}
+  await fbSet('expenses', { list: expenses });
+};
 
-function deleteExpense(id) {
+window.deleteExpense = async function(id) {
   expenses = expenses.filter(e => e.id !== id);
-  save('expenses', expenses); refreshMonthView();
-}
+  await fbSet('expenses', { list: expenses });
+};
 
-function clearMonthExpenses() {
+window.clearMonthExpenses = async function() {
   const key = currentKey();
   if (!confirm(`Clear all expenses for ${MONTHS[viewMonth]} ${viewYear}?`)) return;
   expenses = expenses.filter(e => !e.date?.startsWith(key));
-  save('expenses', expenses); refreshMonthView();
-}
+  await fbSet('expenses', { list: expenses });
+};
 
 function refreshMonthView() {
-  const key = currentKey();
+  const key    = currentKey();
   const mExps  = monthExpenses(viewYear, viewMonth);
   const budget = budgets[key] || 0;
   const total  = mExps.reduce((s,e) => s+e.amt, 0);
-  document.getElementById('month-label').textContent   = `${MONTHS[viewMonth]} ${viewYear}`;
-  document.getElementById('budget-input').value        = budget || '';
+
+  document.getElementById('month-label').textContent = `${MONTHS[viewMonth]} ${viewYear}`;
+  document.getElementById('budget-input').value      = budget || '';
   const pct = budget > 0 ? Math.min(total/budget, 1) : 0;
   document.getElementById('ring-arc').style.strokeDashoffset = 238.76 - 238.76*pct;
   document.getElementById('ring-pct').textContent  = (pct*100).toFixed(0)+'%';
@@ -442,11 +557,12 @@ function refreshMonthView() {
   document.getElementById('budget-remain-text').textContent = budget
     ? (total>budget ? `⚠️ Over by ${fmt(total-budget)}` : `${fmt(budget-total)} remaining`)
     : 'Set a budget to track progress';
+
   const list = document.getElementById('expense-list');
   if (!mExps.length) {
     list.innerHTML = '<div class="empty"><span>🧾</span>No expenses this month. Add one above.</div>';
   } else {
-    list.innerHTML = [...mExps].sort((a,b)=>b.date.localeCompare(a.date)).map(e => `
+    list.innerHTML = [...mExps].sort((a,b)=>b.date.localeCompare(a.date)).map(e=>`
       <div class="expense-item">
         <div class="cat-dot" style="background:${CAT_COLORS[e.cat]||'#888'}"></div>
         <div class="exp-name">${e.name}</div>
@@ -458,9 +574,9 @@ function refreshMonthView() {
   }
   const el = document.getElementById('cat-breakdown');
   if (!mExps.length) { el.innerHTML=''; return; }
-  const totals = {}; mExps.forEach(e => { totals[e.cat]=(totals[e.cat]||0)+e.amt; });
-  const max = Math.max(...Object.values(totals));
-  el.innerHTML = `<div class="section-label" style="margin-top:0">By Category</div>` +
+  const totals={}; mExps.forEach(e=>{ totals[e.cat]=(totals[e.cat]||0)+e.amt; });
+  const max=Math.max(...Object.values(totals));
+  el.innerHTML=`<div class="section-label" style="margin-top:0">By Category</div>`+
     Object.entries(totals).sort((a,b)=>b[1]-a[1]).map(([cat,amt])=>`
       <div class="cat-bar-row">
         <span class="cat-bar-label">${cat}</span>
@@ -470,52 +586,42 @@ function refreshMonthView() {
 }
 
 function renderSpendOverview() {
-  const monthSet = new Set();
-  expenses.forEach(e => { if(e.date) monthSet.add(e.date.slice(0,7)); });
-  Object.keys(budgets).forEach(k => monthSet.add(k));
-  for (let i=11; i>=0; i--) {
-    const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
-    monthSet.add(monthKey(d.getFullYear(), d.getMonth()));
-  }
-  const sorted = [...monthSet].sort();
-  const chart12 = sorted.slice(-12);
-  const chart12totals = chart12.map(k => { const [y,m]=k.split('-').map(Number); return monthExpenses(y,m-1).reduce((s,e)=>s+e.amt,0); });
-  const maxBar = Math.max(...chart12totals, 1);
-  const activeKey = monthKey(viewYear, viewMonth);
-
-  document.getElementById('spend-annual-chart').innerHTML = chart12.map((k,i)=>{
-    const h = Math.max((chart12totals[i]/maxBar)*100, chart12totals[i]>0?4:2);
+  const monthSet=new Set();
+  expenses.forEach(e=>{ if(e.date) monthSet.add(e.date.slice(0,7)); });
+  Object.keys(budgets).forEach(k=>monthSet.add(k));
+  for(let i=11;i>=0;i--){ const d=new Date(now.getFullYear(),now.getMonth()-i,1); monthSet.add(monthKey(d.getFullYear(),d.getMonth())); }
+  const sorted=[...monthSet].sort();
+  const chart12=sorted.slice(-12);
+  const chart12totals=chart12.map(k=>{const[y,m]=k.split('-').map(Number);return monthExpenses(y,m-1).reduce((s,e)=>s+e.amt,0);});
+  const maxBar=Math.max(...chart12totals,1);
+  const activeKey=monthKey(viewYear,viewMonth);
+  const chartEl=document.getElementById('spend-annual-chart');
+  chartEl.innerHTML=chart12.map((k,i)=>{
+    const h=Math.max((chart12totals[i]/maxBar)*100,chart12totals[i]>0?4:2);
     return `<div class="annual-bar-col" onclick="jumpToMonth('${k}')">
-      <div class="annual-bar${chart12totals[i]>0?' has-data':''}${k===activeKey?' active-bar':''}"></div>
+      <div class="annual-bar${chart12totals[i]>0?' has-data':''}${k===activeKey?' active-bar':''}" style="height:${h}%"></div>
     </div>`;
   }).join('');
-  // override heights via inline style after setting classes
-  const bars = document.getElementById('spend-annual-chart').querySelectorAll('.annual-bar');
-  chart12.forEach((k,i) => { bars[i].style.height = Math.max((chart12totals[i]/maxBar)*100, chart12totals[i]>0?4:2)+'%'; });
-
-  document.getElementById('spend-annual-labels').innerHTML = chart12.map((k,i)=>{
-    const [y,m]=k.split('-').map(Number);
+  document.getElementById('spend-annual-labels').innerHTML=chart12.map((k)=>{
+    const[y,m]=k.split('-').map(Number);
     return `<div style="flex:1;text-align:center;font-family:'DM Mono',monospace;font-size:0.58rem;color:${k===activeKey?'var(--accent)':'var(--muted)'};">${MONTHS_SHORT[m-1]}<br>${String(y).slice(2)}</div>`;
   }).join('');
-
-  const withData = sorted.filter(k=>{ const [y,m]=k.split('-').map(Number); return monthExpenses(y,m-1).length>0||budgets[k]; });
-  const grid = document.getElementById('overview-grid');
-  if (!withData.length) { grid.innerHTML='<div class="empty"><span>📊</span>No data yet.</div>'; }
-  else {
-    const maxSpend = Math.max(...withData.map(k=>{ const [y,m]=k.split('-').map(Number); return monthExpenses(y,m-1).reduce((s,e)=>s+e.amt,0); }),1);
-    grid.innerHTML = [...withData].reverse().map(k=>{
-      const [y,m]=k.split('-').map(Number);
-      const exps=monthExpenses(y,m-1), total=exps.reduce((s,e)=>s+e.amt,0), budget=budgets[k]||0;
-      const pct=budget>0?Math.min(total/budget*100,100):(total/maxSpend*100);
-      const isOver=budget>0&&total>budget, isCurrent=k===monthKey(now.getFullYear(),now.getMonth());
-      return `<div class="month-card${isCurrent?' current-month':''}" onclick="jumpToMonth('${k}')">
-        <div class="month-card-name">${MONTHS[m-1]} <span style="color:var(--muted);font-size:0.8rem">${y}</span></div>
-        <div class="month-card-amt">${fmt(total)}</div>
-        <div class="month-card-meta">${exps.length} expense${exps.length!==1?'s':''}${budget?' · budget '+fmt(budget):''}</div>
-        <div class="month-card-bar"><div class="month-card-bar-fill${isOver?' over':''}" style="width:${pct.toFixed(1)}%"></div></div>
-      </div>`;
-    }).join('');
-  }
+  const withData=sorted.filter(k=>{const[y,m]=k.split('-').map(Number);return monthExpenses(y,m-1).length>0||budgets[k];});
+  const grid=document.getElementById('overview-grid');
+  if(!withData.length){grid.innerHTML='<div class="empty"><span>📊</span>No data yet.</div>';return;}
+  const maxSpend=Math.max(...withData.map(k=>{const[y,m]=k.split('-').map(Number);return monthExpenses(y,m-1).reduce((s,e)=>s+e.amt,0);}),1);
+  grid.innerHTML=[...withData].reverse().map(k=>{
+    const[y,m]=k.split('-').map(Number);
+    const exps=monthExpenses(y,m-1),total=exps.reduce((s,e)=>s+e.amt,0),budget=budgets[k]||0;
+    const pct=budget>0?Math.min(total/budget*100,100):(total/maxSpend*100);
+    const isOver=budget>0&&total>budget,isCurrent=k===monthKey(now.getFullYear(),now.getMonth());
+    return `<div class="month-card${isCurrent?' current-month':''}" onclick="jumpToMonth('${k}')">
+      <div class="month-card-name">${MONTHS[m-1]} <span style="color:var(--muted);font-size:0.8rem">${y}</span></div>
+      <div class="month-card-amt">${fmt(total)}</div>
+      <div class="month-card-meta">${exps.length} expense${exps.length!==1?'s':''}${budget?' · budget '+fmt(budget):''}</div>
+      <div class="month-card-bar"><div class="month-card-bar-fill${isOver?' over':''}" style="width:${pct.toFixed(1)}%"></div></div>
+    </div>`;
+  }).join('');
   const allTotal=expenses.reduce((s,e)=>s+e.amt,0);
   const mWithExp=new Set(expenses.map(e=>e.date?.slice(0,7))).size;
   document.getElementById('all-time-total').innerHTML=`<em>${fmt(allTotal)}</em>`;
@@ -524,156 +630,157 @@ function renderSpendOverview() {
   document.getElementById('ov-avg').textContent=mWithExp>0?fmt(allTotal/mWithExp):'—';
 }
 
-function jumpToMonth(key) {
-  const [y,m]=key.split('-').map(Number);
+window.jumpToMonth = function(key) {
+  const[y,m]=key.split('-').map(Number);
   viewYear=y; viewMonth=m-1;
   switchSpendSubTab('month'); refreshMonthView();
-}
-
-// init spending
-document.getElementById('currency-select').value = currency();
-document.getElementById('exp-date').value = now.toISOString().slice(0,10);
-refreshMonthView();
+};
 
 // ══════════════════════════════
 //  SCHEDULE
 // ══════════════════════════════
-let events = load('events', []);
-let weekOffset = 0;
-let selectedColor = 'green';
+function seedSchedule() {
+  const endDate=new Date('2026-10-31');
+  const templates=[
+    {day:1,time:'11:00',title:'Translation for Professional P. (HB7705)',color:'blue'},
+    {day:2,time:'09:00',title:'Robotic Process Automation (BAB Lab Comp)',color:'teal'},
+    {day:2,time:'14:30',title:'Essay Writing (HB7703)',color:'indigo'},
+    {day:4,time:'11:00',title:'Translation for Professional P. (HB7705)',color:'blue'},
+    {day:5,time:'09:00',title:'Robotic Process Automation (BAB Lab Comp)',color:'teal'},
+    {day:5,time:'14:30',title:'Essay Writing (HB7703)',color:'indigo'},
+  ];
+  const start=new Date('2026-06-20');
+  const list=[];
+  templates.forEach(t=>{
+    const first=new Date(start);
+    const diff=(t.day-first.getDay()+7)%7;
+    first.setDate(first.getDate()+diff);
+    let cur=new Date(first);
+    while(cur<=endDate){
+      list.push({id:Date.now()+Math.random(),title:t.title,date:isoDate(cur),time:t.time,color:t.color});
+      cur.setDate(cur.getDate()+7);
+    }
+  });
+  return list;
+}
 
-// Build colour picker swatches
-(function buildPicker() {
-  const picker = document.getElementById('color-picker');
-  Object.entries(EV_COLORS).forEach(([key, c]) => {
-    const sw = document.createElement('div');
-    sw.className = 'color-swatch' + (key==='green'?' selected':'');
-    sw.style.background = c.hex;
-    sw.title = c.label;
-    sw.onclick = () => {
-      selectedColor = key;
-      document.getElementById('ev-color').value = key;
-      picker.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+function buildColorPicker() {
+  const picker=document.getElementById('color-picker');
+  picker.innerHTML='';
+  Object.entries(EV_COLORS).forEach(([key,c])=>{
+    const sw=document.createElement('div');
+    sw.className='color-swatch'+(key==='green'?' selected':'');
+    sw.style.background=c.hex; sw.title=c.label;
+    sw.onclick=()=>{
+      selectedColor=key;
+      document.getElementById('ev-color').value=key;
+      picker.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('selected'));
       sw.classList.add('selected');
     };
     picker.appendChild(sw);
   });
-})();
+}
+
+window.switchSchedSubTab = function(name) {
+  document.querySelectorAll('#tab-schedule .sub-tab-btn').forEach((b,i)=>
+    b.classList.toggle('active',(i===0&&name==='week')||(i===1&&name==='overview')));
+  document.getElementById('sched-sub-week').style.display     = name==='week'     ?'':'none';
+  document.getElementById('sched-sub-overview').style.display = name==='overview' ?'':'none';
+  if(name==='overview') renderSchedOverview();
+};
+
+window.changeWeek = function(dir) { weekOffset+=dir; renderSchedule(); };
+
+window.addEvent = async function() {
+  const title=document.getElementById('ev-title').value.trim();
+  const date =document.getElementById('ev-date').value;
+  const time =document.getElementById('ev-time').value;
+  const color=document.getElementById('ev-color').value||'green';
+  if(!title||!date) return;
+  events.push({id:Date.now(),title,date,time,color});
+  document.getElementById('ev-title').value='';
+  await fbSet('events',{list:events});
+};
+
+window.deleteEvent = async function(id) {
+  events=events.filter(e=>e.id!==id);
+  await fbSet('events',{list:events});
+};
+
+window.clearEvents = async function() {
+  if(!confirm('Clear all events?')) return;
+  events=[];
+  await fbSet('events',{list:events});
+};
 
 function getWeekDates(offset) {
-  const today = new Date();
-  const dow = today.getDay();
-  const monday = new Date(today);
-  monday.setDate(today.getDate() - (dow===0?6:dow-1) + offset*7);
-  return Array.from({length:7}, (_,i) => { const d=new Date(monday); d.setDate(monday.getDate()+i); return d; });
-}
-
-function isoDate(d) { return d.toISOString().slice(0,10); }
-function changeWeek(dir) { weekOffset += dir; renderSchedule(); }
-
-function switchSchedSubTab(name) {
-  const btns = document.querySelectorAll('#tab-schedule .sub-tab-btn');
-  btns.forEach((b,i) => b.classList.toggle('active', (i===0&&name==='week')||(i===1&&name==='overview')));
-  document.getElementById('sched-sub-week').style.display     = name==='week'     ? '' : 'none';
-  document.getElementById('sched-sub-overview').style.display = name==='overview' ? '' : 'none';
-  if (name === 'overview') renderSchedOverview();
-}
-
-function addEvent() {
-  const title = document.getElementById('ev-title').value.trim();
-  const date  = document.getElementById('ev-date').value;
-  const time  = document.getElementById('ev-time').value;
-  const color = document.getElementById('ev-color').value || 'green';
-  if (!title || !date) return;
-  events.push({ id: Date.now(), title, date, time, color });
-  save('events', events);
-  document.getElementById('ev-title').value = '';
-  renderSchedule();
-}
-
-function deleteEvent(id) {
-  events = events.filter(e => e.id !== id);
-  save('events', events); renderSchedule();
-}
-
-function clearEvents() {
-  if (!confirm('Clear all events?')) return;
-  events=[]; save('events', events); renderSchedule();
+  const today=new Date(), dow=today.getDay();
+  const monday=new Date(today);
+  monday.setDate(today.getDate()-(dow===0?6:dow-1)+offset*7);
+  return Array.from({length:7},(_,i)=>{const d=new Date(monday);d.setDate(monday.getDate()+i);return d;});
 }
 
 function renderSchedule() {
-  const days = getWeekDates(weekOffset);
-  const todayStr = isoDate(new Date());
-  const DAY_NAMES = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-  const first=days[0], last=days[6];
-  document.getElementById('week-label').textContent =
-    first.toLocaleDateString('en-US',{month:'short',day:'numeric'}) + ' – ' +
+  const days=getWeekDates(weekOffset);
+  const todayStr=isoDate(new Date());
+  const DAY_NAMES=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const first=days[0],last=days[6];
+  document.getElementById('week-label').textContent=
+    first.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' – '+
     last.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  document.getElementById('week-grid').innerHTML = days.map((d,i)=>{
-    const ds=isoDate(d), isToday=ds===todayStr;
-    const dayEvents=events.filter(e=>e.date===ds).sort((a,b)=>a.time.localeCompare(b.time));
+  document.getElementById('week-grid').innerHTML=days.map((d,i)=>{
+    const ds=isoDate(d),isToday=ds===todayStr;
+    const dayEvs=events.filter(e=>e.date===ds).sort((a,b)=>a.time.localeCompare(b.time));
     const numEl=isToday?`<span class="day-num-wrap">${d.getDate()}</span>`:`<span>${d.getDate()}</span>`;
-    const evBlocks=dayEvents.map(e=>`
-      <div class="event-block ev-${e.color||'green'}" onclick="deleteEvent(${e.id})" title="Click to delete">
-        ${e.time?`<div class="ev-time">${e.time}</div>`:''}
-        <div>${e.title}</div>
-      </div>`).join('');
     return `<div class="day-col">
       <div class="day-header${isToday?' today':''}">
         ${DAY_NAMES[i]}<br>${numEl}
-      </div>${evBlocks}
+      </div>
+      ${dayEvs.map(e=>`
+        <div class="event-block ev-${e.color||'green'}" onclick="deleteEvent(${e.id})" title="Click to delete">
+          ${e.time?`<div class="ev-time">${e.time}</div>`:''}
+          <div>${e.title}</div>
+        </div>`).join('')}
     </div>`;
   }).join('');
 }
 
 function renderSchedOverview() {
-  // collect all months that have events
-  const monthSet = new Set();
-  events.forEach(e => { if(e.date) monthSet.add(e.date.slice(0,7)); });
-  for (let i=11;i>=0;i--) {
-    const d=new Date(now.getFullYear(),now.getMonth()-i,1);
-    monthSet.add(monthKey(d.getFullYear(),d.getMonth()));
-  }
+  const monthSet=new Set();
+  events.forEach(e=>{if(e.date) monthSet.add(e.date.slice(0,7));});
+  for(let i=11;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth()-i,1);monthSet.add(monthKey(d.getFullYear(),d.getMonth()));}
   const sorted=[...monthSet].sort();
   const chart12=sorted.slice(-12);
   const chart12counts=chart12.map(k=>events.filter(e=>e.date?.startsWith(k)).length);
   const maxBar=Math.max(...chart12counts,1);
   const activeKey=monthKey(now.getFullYear(),now.getMonth());
-
   const chartEl=document.getElementById('sched-annual-chart');
   chartEl.innerHTML=chart12.map((k,i)=>{
-    const h=Math.max((chart12counts[i]/maxBar)*100, chart12counts[i]>0?4:2);
+    const h=Math.max((chart12counts[i]/maxBar)*100,chart12counts[i]>0?4:2);
     return `<div class="annual-bar-col" onclick="jumpToWeekOfMonth('${k}')">
-      <div class="annual-bar${chart12counts[i]>0?' has-data sched':''}${k===activeKey?' active-bar':''}"></div>
+      <div class="annual-bar${chart12counts[i]>0?' has-data sched':''}${k===activeKey?' active-bar':''}" style="height:${h}%"></div>
     </div>`;
   }).join('');
-  chartEl.querySelectorAll('.annual-bar').forEach((b,i)=>{ b.style.height=Math.max((chart12counts[i]/maxBar)*100,chart12counts[i]>0?4:2)+'%'; });
-
-  document.getElementById('sched-annual-labels').innerHTML=chart12.map((k,i)=>{
-    const [y,m]=k.split('-').map(Number);
+  document.getElementById('sched-annual-labels').innerHTML=chart12.map(k=>{
+    const[y,m]=k.split('-').map(Number);
     return `<div style="flex:1;text-align:center;font-family:'DM Mono',monospace;font-size:0.58rem;color:${k===activeKey?'var(--green)':'var(--muted)'};">${MONTHS_SHORT[m-1]}<br>${String(y).slice(2)}</div>`;
   }).join('');
-
   const withData=sorted.filter(k=>events.some(e=>e.date?.startsWith(k)));
   const grid=document.getElementById('sched-overview-grid');
-  if (!withData.length) { grid.innerHTML='<div class="empty"><span>📅</span>No events recorded yet.</div>'; }
-  else {
-    grid.innerHTML=[...withData].reverse().map(k=>{
-      const [y,m]=k.split('-').map(Number);
-      const mEvs=events.filter(e=>e.date?.startsWith(k));
-      const isCurrent=k===monthKey(now.getFullYear(),now.getMonth());
-      // colour pips — top 6 unique colours used
-      const usedColors=[...new Set(mEvs.map(e=>e.color||'green'))].slice(0,8);
-      const pips=usedColors.map(c=>`<div class="sched-pip" style="background:${EV_COLORS[c]?.hex||'#888'}"></div>`).join('');
-      return `<div class="sched-month-card${isCurrent?' current-month':''}" onclick="jumpToWeekOfMonth('${k}')">
-        <div class="sched-month-card-name">${MONTHS[m-1]} <span style="color:var(--muted);font-size:0.8rem">${y}</span></div>
-        <div class="sched-month-card-count">${mEvs.length}</div>
-        <div class="sched-month-card-meta">event${mEvs.length!==1?'s':''} scheduled</div>
-        <div class="sched-card-pips">${pips}</div>
-      </div>`;
-    }).join('');
-  }
-
+  if(!withData.length){grid.innerHTML='<div class="empty"><span>📅</span>No events recorded yet.</div>';return;}
+  grid.innerHTML=[...withData].reverse().map(k=>{
+    const[y,m]=k.split('-').map(Number);
+    const mEvs=events.filter(e=>e.date?.startsWith(k));
+    const isCurrent=k===monthKey(now.getFullYear(),now.getMonth());
+    const usedColors=[...new Set(mEvs.map(e=>e.color||'green'))].slice(0,8);
+    const pips=usedColors.map(c=>`<div class="sched-pip" style="background:${EV_COLORS[c]?.hex||'#888'}"></div>`).join('');
+    return `<div class="sched-month-card${isCurrent?' current-month':''}" onclick="jumpToWeekOfMonth('${k}')">
+      <div class="sched-month-card-name">${MONTHS[m-1]} <span style="color:var(--muted);font-size:0.8rem">${y}</span></div>
+      <div class="sched-month-card-count">${mEvs.length}</div>
+      <div class="sched-month-card-meta">event${mEvs.length!==1?'s':''} scheduled</div>
+      <div class="sched-card-pips">${pips}</div>
+    </div>`;
+  }).join('');
   const totalEv=events.length;
   const mWithEv=new Set(events.map(e=>e.date?.slice(0,7)).filter(Boolean)).size;
   document.getElementById('sched-all-total').innerHTML=`<em style="font-style:italic;color:#c9aa8c;">${totalEv}</em> events`;
@@ -682,46 +789,18 @@ function renderSchedOverview() {
   document.getElementById('sched-ov-avg').textContent=mWithEv>0?Math.round(totalEv/mWithEv):'—';
 }
 
-function jumpToWeekOfMonth(key) {
-  // find the first week of this month and jump there
-  const [y,m]=key.split('-').map(Number);
+window.jumpToWeekOfMonth = function(key) {
+  const[y,m]=key.split('-').map(Number);
   const target=new Date(y,m-1,1);
-  const today=new Date();
-  const diff=Math.round((target-today)/(7*24*3600*1000));
-  weekOffset=diff;
-  switchSchedSubTab('week');
-  renderSchedule();
-}
+  weekOffset=Math.round((target-new Date())/(7*24*3600*1000));
+  switchSchedSubTab('week'); renderSchedule();
+};
 
 document.getElementById('ev-date').value = now.toISOString().slice(0,10);
+document.getElementById('exp-date').value = now.toISOString().slice(0,10);
 
-// Pre-load recurring classes every week until end of October 2026
-if (!load('schedule_seeded', false)) {
-  const endDate=new Date('2026-10-31');
-  const templates=[
-    { day:1, time:'11:00', title:'Translation for Professional P. (HB7705)', color:'blue' },
-    { day:2, time:'09:00', title:'Robotic Process Automation (BAB Lab Comp)',  color:'teal' },
-    { day:2, time:'14:30', title:'Essay Writing (HB7703)',                     color:'indigo' },
-    { day:4, time:'11:00', title:'Translation for Professional P. (HB7705)', color:'blue' },
-    { day:5, time:'09:00', title:'Robotic Process Automation (BAB Lab Comp)',  color:'teal' },
-    { day:5, time:'14:30', title:'Essay Writing (HB7703)',                     color:'indigo' },
-  ];
-  const start=new Date('2026-06-20');
-  templates.forEach(t=>{
-    const first=new Date(start);
-    const diff=(t.day-first.getDay()+7)%7;
-    first.setDate(first.getDate()+diff);
-    let cur=new Date(first);
-    while (cur<=endDate) {
-      events.push({ id:Date.now()+Math.random(), title:t.title, date:isoDate(cur), time:t.time, color:t.color });
-      cur.setDate(cur.getDate()+7);
-    }
-  });
-  save('events', events);
-  save('schedule_seeded', true);
-}
-
-renderSchedule();
+// ── KICK OFF ──
+init();
 </script>
 </body>
 </html>
