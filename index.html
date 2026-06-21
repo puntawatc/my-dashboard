@@ -40,6 +40,10 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 
 .month-nav{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
 .month-nav span{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:300;flex:1;text-align:center;}
+.jump-row{display:flex;align-items:center;gap:.6rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.jump-row label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:var(--muted);}
+.jump-row input{border:1.5px solid var(--border);border-radius:6px;padding:.4rem .6rem;font-family:'Inter',sans-serif;font-size:.82rem;background:#fff;color:var(--ink);outline:none;}
+.jump-row input:focus{border-color:var(--accent);}
 
 .budget-ring-row{display:flex;gap:2rem;align-items:center;background:var(--ink);color:var(--paper);border-radius:12px;padding:1.5rem 2rem;margin-bottom:2rem;flex-wrap:wrap;}
 .ring-wrap{position:relative;width:100px;height:100px;flex-shrink:0;}
@@ -71,6 +75,10 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 
 /* EXPENSE LIST */
 .expense-list{display:flex;flex-direction:column;gap:.5rem;}
+.day-group{margin-bottom:1.25rem;}
+.day-group-header{display:flex;align-items:center;justify-content:space-between;padding:.3rem .2rem .5rem;border-bottom:1.5px solid var(--border);margin-bottom:.5rem;}
+.day-group-date{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.05em;color:var(--ink);font-weight:500;}
+.day-group-sum{font-family:'Fraunces',serif;font-size:.95rem;font-weight:600;color:var(--muted);}
 .expense-item{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;background:#fff;border-radius:8px;border:1.5px solid var(--border);transition:border-color .15s;}
 .expense-item:hover{border-color:var(--accent-soft);}
 .cat-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
@@ -140,6 +148,18 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .ev-teal   {background:#d9f0ef;border-color:#2a9a94;}.ev-teal   .ev-time{color:#2a9a94;}
 .ev-indigo {background:#dde0f5;border-color:#4a55b5;}.ev-indigo .ev-time{color:#4a55b5;}
 .ev-rose   {background:#f5dde0;border-color:#b54a55;}.ev-rose   .ev-time{color:#b54a55;}
+
+/* ALL EVENTS LIST */
+.list-controls{display:flex;gap:.6rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.list-controls input{flex:1;min-width:160px;border:1.5px solid var(--border);border-radius:6px;padding:.55rem .75rem;font-family:'Inter',sans-serif;font-size:.88rem;background:#fff;color:var(--ink);outline:none;}
+.list-controls input:focus{border-color:var(--green);}
+.list-controls select{border:1.5px solid var(--border);border-radius:6px;padding:.55rem .75rem;font-family:'Inter',sans-serif;font-size:.85rem;background:#fff;color:var(--ink);outline:none;cursor:pointer;}
+.ev-list-day{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.05em;color:var(--muted);margin:1.25rem 0 .5rem;padding-bottom:.3rem;border-bottom:1.5px solid var(--border);}
+.ev-list-day.is-today{color:var(--green);font-weight:500;}
+.ev-list-item{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;background:#fff;border-radius:8px;border:1.5px solid var(--border);border-left-width:4px;margin-bottom:.5rem;}
+.ev-list-time{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);min-width:48px;}
+.ev-list-title{flex:1;font-size:.9rem;}
+.ev-list-actions{display:flex;gap:.3rem;flex-shrink:0;}
 
 .color-picker{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;}
 .color-swatch{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .12s,border-color .12s;flex-shrink:0;}
@@ -261,6 +281,11 @@ header h1 em{font-style:italic;color:#c9aa8c;}
       <span id="month-label"></span>
       <button class="btn btn-ghost" onclick="changeMonth(1)">Next →</button>
     </div>
+    <div class="jump-row">
+      <label>JUMP TO DATE</label>
+      <input type="date" id="jump-date" onchange="jumpToDate()"/>
+      <button class="btn btn-ghost btn-sm" onclick="jumpToToday()">Today</button>
+    </div>
     <div class="budget-ring-row">
       <div class="ring-wrap">
         <svg width="100" height="100" viewBox="0 0 100 100">
@@ -335,6 +360,7 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 <div id="tab-schedule" class="tab-panel">
   <div class="sub-tabs">
     <button class="sub-tab-btn active" onclick="switchSchedSubTab('week')">This Week</button>
+    <button class="sub-tab-btn" onclick="switchSchedSubTab('list')">All Events</button>
     <button class="sub-tab-btn" onclick="switchSchedSubTab('overview')">All Months</button>
   </div>
   <div id="sched-sub-week">
@@ -358,6 +384,17 @@ header h1 em{font-style:italic;color:#c9aa8c;}
       <button class="btn btn-primary" onclick="addEvent()">+ Add</button>
       <button class="btn btn-ghost" onclick="clearEvents()">Clear All</button>
     </div>
+  </div>
+  <div id="sched-sub-list" style="display:none;">
+    <div class="list-controls">
+      <input type="text" id="ev-search" placeholder="🔍 Search events…" oninput="renderEventList()"/>
+      <select id="ev-filter" onchange="renderEventList()">
+        <option value="upcoming">Upcoming only</option>
+        <option value="all">All events</option>
+        <option value="past">Past only</option>
+      </select>
+    </div>
+    <div id="event-list"></div>
   </div>
   <div id="sched-sub-overview" style="display:none;">
     <div class="section-label">Events by Month</div>
@@ -431,7 +468,7 @@ async function fbSet(path,data){
 function startListeners(){
   onSnapshot(uDoc('expenses'),s=>{expenses=s.exists()?(s.data().list||[]):[];refreshMonthView();setSyncStatus('synced','Up to date');});
   onSnapshot(uDoc('budgets'), s=>{budgets=s.exists()?(s.data().map||[]):{};refreshMonthView();});
-  onSnapshot(uDoc('events'),  s=>{events=s.exists()?(s.data().list||[]):[];renderSchedule();});
+  onSnapshot(uDoc('events'),  s=>{events=s.exists()?(s.data().list||[]):[];renderSchedule();if(document.getElementById('sched-sub-list').style.display!=='none')renderEventList();});
   onSnapshot(uDoc('settings'),s=>{
     if(s.exists()){settings=s.data();document.getElementById('currency-select').value=settings.currency||'฿';}
   });
@@ -588,18 +625,34 @@ function refreshMonthView(){
   if(!mExps.length){
     list.innerHTML='<div class="empty"><span>🧾</span>No expenses this month. Add one above.</div>';
   }else{
-    list.innerHTML=[...mExps].sort((a,b)=>b.date.localeCompare(a.date)).map(e=>`
-      <div class="expense-item">
-        <div class="cat-dot" style="background:${CAT_COLORS[e.cat]||'#888'}"></div>
-        <div class="exp-name">${e.name}</div>
-        <span class="exp-cat">${e.cat}</span>
-        <span class="exp-date">${e.date}</span>
-        <span class="exp-amt">${fmt(e.amt)}</span>
-        <div class="item-actions">
-          <button class="edit-btn" onclick="openExpModal(${e.id})" title="Edit">✏️</button>
-          <button class="del-btn"  onclick="deleteExpense(${e.id})" title="Delete">✕</button>
+    // group by day (date string), newest day first
+    const byDay={};
+    mExps.forEach(e=>{(byDay[e.date]=byDay[e.date]||[]).push(e);});
+    const dayKeys=Object.keys(byDay).sort((a,b)=>b.localeCompare(a));
+    list.innerHTML=dayKeys.map(dk=>{
+      const dayExps=byDay[dk];
+      const daySum=dayExps.reduce((s,e)=>s+e.amt,0);
+      const dObj=new Date(dk+'T00:00:00');
+      const dayLabel=dObj.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+      const rows=dayExps.map(e=>`
+        <div class="expense-item">
+          <div class="cat-dot" style="background:${CAT_COLORS[e.cat]||'#888'}"></div>
+          <div class="exp-name">${e.name}</div>
+          <span class="exp-cat">${e.cat}</span>
+          <span class="exp-amt">${fmt(e.amt)}</span>
+          <div class="item-actions">
+            <button class="edit-btn" onclick="openExpModal(${e.id})" title="Edit">✏️</button>
+            <button class="del-btn"  onclick="deleteExpense(${e.id})" title="Delete">✕</button>
+          </div>
+        </div>`).join('');
+      return `<div class="day-group">
+        <div class="day-group-header">
+          <span class="day-group-date">${dayLabel}</span>
+          <span class="day-group-sum">${fmt(daySum)}</span>
         </div>
-      </div>`).join('');
+        ${rows}
+      </div>`;
+    }).join('');
   }
   const el=document.getElementById('cat-breakdown');
   if(!mExps.length){el.innerHTML='';return;}
@@ -662,6 +715,23 @@ window.jumpToMonth=function(key){
   switchSpendSubTab('month');refreshMonthView();
 };
 
+window.jumpToDate=function(){
+  const v=document.getElementById('jump-date').value;
+  if(!v)return;
+  const[y,m]=v.split('-').map(Number);
+  viewYear=y;viewMonth=m-1;
+  refreshMonthView();
+  // also prefill the add-expense date for convenience
+  document.getElementById('exp-date').value=v;
+};
+
+window.jumpToToday=function(){
+  const t=new Date();
+  viewYear=t.getFullYear();viewMonth=t.getMonth();
+  document.getElementById('jump-date').value=t.toISOString().slice(0,10);
+  refreshMonthView();
+};
+
 // ══════════════════════════════════════
 //  SCHEDULE
 // ══════════════════════════════════════
@@ -712,12 +782,51 @@ function buildColorPicker(containerId,isModal){
 
 window.switchSchedSubTab=function(name){
   document.querySelectorAll('#tab-schedule .sub-tab-btn').forEach((b,i)=>
-    b.classList.toggle('active',(i===0&&name==='week')||(i===1&&name==='overview')));
+    b.classList.toggle('active',(i===0&&name==='week')||(i===1&&name==='list')||(i===2&&name==='overview')));
   document.getElementById('sched-sub-week').style.display    =name==='week'    ?'':'none';
+  document.getElementById('sched-sub-list').style.display    =name==='list'    ?'':'none';
   document.getElementById('sched-sub-overview').style.display=name==='overview'?'':'none';
   if(name==='overview')renderSchedOverview();
+  if(name==='list')renderEventList();
 };
 window.changeWeek=function(dir){weekOffset+=dir;renderSchedule();};
+
+window.renderEventList=function(){
+  const search=(document.getElementById('ev-search').value||'').toLowerCase();
+  const filter=document.getElementById('ev-filter').value;
+  const todayStr=isoDate(new Date());
+  let evs=[...events];
+  if(filter==='upcoming')evs=evs.filter(e=>e.date>=todayStr);
+  else if(filter==='past')evs=evs.filter(e=>e.date<todayStr);
+  if(search)evs=evs.filter(e=>e.title.toLowerCase().includes(search));
+  // sort: upcoming ascending, past descending, all ascending
+  evs.sort((a,b)=>{
+    const c=a.date.localeCompare(b.date);
+    return c!==0?c:(a.time||'').localeCompare(b.time||'');
+  });
+  if(filter==='past')evs.reverse();
+  const cont=document.getElementById('event-list');
+  if(!evs.length){cont.innerHTML='<div class="empty"><span>📅</span>No events match.</div>';return;}
+  // group by date
+  const byDay={};
+  evs.forEach(e=>{(byDay[e.date]=byDay[e.date]||[]).push(e);});
+  const dayKeys=Object.keys(byDay);
+  cont.innerHTML=dayKeys.map(dk=>{
+    const dObj=new Date(dk+'T00:00:00');
+    const lbl=dObj.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    const isToday=dk===todayStr;
+    const rows=byDay[dk].sort((a,b)=>(a.time||'').localeCompare(b.time||'')).map(e=>`
+      <div class="ev-list-item" style="border-left-color:${EV_COLORS[e.color||'green']?.hex||'#888'}">
+        <span class="ev-list-time">${e.time||'—'}</span>
+        <span class="ev-list-title">${e.title}</span>
+        <div class="ev-list-actions">
+          <button class="edit-btn" onclick="openEvModal(${e.id})" title="Edit">✏️</button>
+          <button class="del-btn"  onclick="deleteEvent(${e.id})" title="Delete">✕</button>
+        </div>
+      </div>`).join('');
+    return `<div class="ev-list-day${isToday?' is-today':''}">${lbl}${isToday?' · Today':''}</div>${rows}`;
+  }).join('');
+};
 
 window.addEvent=async function(){
   const title=document.getElementById('ev-title').value.trim();
@@ -859,6 +968,7 @@ window.jumpToWeekOfMonth=function(key){
 
 document.getElementById('ev-date').value=now.toISOString().slice(0,10);
 document.getElementById('exp-date').value=now.toISOString().slice(0,10);
+document.getElementById('jump-date').value=now.toISOString().slice(0,10);
 init();
 </script>
 </body>
