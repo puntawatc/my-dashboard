@@ -159,8 +159,13 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .tg-freeday{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:.6rem;color:#cbb9a0;text-align:center;line-height:1.6;}
 .tg-top-chips{position:absolute;top:4px;left:3px;right:3px;display:flex;flex-direction:column;gap:3px;}
 .tg-chip{border-left:3px solid var(--muted);border-radius:4px;padding:3px 5px;font-size:.6rem;line-height:1.3;position:relative;}
+.tg-chip.tg-tr{background:var(--tr-bg);border-left-color:var(--tr);color:var(--tr-tx);}
+.tg-chip.tg-rpa{background:var(--rpa-bg);border-left-color:var(--rpa);color:var(--rpa-tx);}
+.tg-chip.tg-es{background:var(--es-bg);border-left-color:var(--es);color:var(--es-tx);}
 .tg-chip .tg-actions{display:none;position:absolute;top:2px;right:2px;}
 .tg-chip:hover .tg-actions{display:flex;}
+.tg-dl-badge{font-size:.55rem;margin-top:5px;padding:2px 5px;background:rgba(255,255,255,.45);border-radius:3px;line-height:1.4;word-break:break-word;}
+.tg-dl-badge.done{opacity:.5;text-decoration:line-through;}
 @media(max-width:700px){
   .tg-grid{grid-template-columns:1fr;}
   .tg-gutter,.tg-dh{display:none;}
@@ -857,9 +862,16 @@ const WEEKLY_CLASSES=[
   {cls:'es', name:'Essay Writing', code:'001218',room:'HB7703',        day:5,start:14.5,end:16},
 ];
 const TG_PX=64,TG_START=9,TG_END=16.5,TG_H=(TG_END-TG_START)*TG_PX;
-const SEMESTER_END='2026-11-01'; // last day of semester (RPA final exam)
+const SEMESTER_END='2026-11-01';
+const CLS_MAP={trans:'tr',rpa:'rpa',essay:'es'};
 function tgFmt(h){const hh=Math.floor(h),mm=Math.round((h-hh)*60);return hh+':'+String(mm).padStart(2,'0');}
 function tgTimeH(t){if(!t)return null;const[h,m]=t.split(':').map(Number);return h+m/60;}
+function isCourseTaskEvent(e){
+  const colorMap={blue:'trans',teal:'rpa',indigo:'essay'};
+  const cid=colorMap[e.color];if(!cid)return false;
+  const course=COURSE_TASKS.find(c=>c.id===cid);
+  return course?course.tasks.some(t=>t.date===e.date):false;
+}
 
 const EV_COLORS={
   green:{hex:'#3a7d5a',label:'Green'},red:{hex:'#c9553a',label:'Red'},blue:{hex:'#4a80b5',label:'Blue'},
@@ -1506,18 +1518,43 @@ function renderSchedule(){
     col.style.height=TG_H+'px';
     col.dataset.label=DAY_NAMES[i]+' '+d.getDate();
 
-    // recurring weekly classes (only within semester)
-    WEEKLY_CLASSES.filter(c=>c.day===i+1&&ds<=SEMESTER_END).forEach(c=>{
+    // recurring weekly classes + deadline badges from COURSE_TASKS
+    const classesThisDay=WEEKLY_CLASSES.filter(c=>c.day===i+1&&ds<=SEMESTER_END);
+    const clsSetThisDay=new Set(classesThisDay.map(c=>c.cls));
+    classesThisDay.forEach(c=>{
       const ev=document.createElement('div');
       ev.className='tg-ev tg-'+c.cls;
       ev.style.top=((c.start-TG_START)*TG_PX)+'px';
       ev.style.height=((c.end-c.start)*TG_PX)+'px';
-      ev.innerHTML=`<div class="tg-et">${tgFmt(c.start)}–${tgFmt(c.end)}</div><div class="tg-en">${c.name}</div><div class="tg-er">${c.room}</div>`;
+      // find deadlines from COURSE_TASKS for this course on this day
+      const dlBadges=[];
+      COURSE_TASKS.forEach(ct=>{
+        if(CLS_MAP[ct.id]===c.cls){
+          ct.tasks.forEach(t=>{
+            if(t.date===ds){
+              const done=courseProgress[t.id];
+              dlBadges.push(`<div class="tg-dl-badge${done?' done':''}">${t.graded?'📝':t.urgent?'⚡':'📌'} ${t.label}</div>`);
+            }
+          });
+        }
+      });
+      ev.innerHTML=`<div class="tg-et">${tgFmt(c.start)}–${tgFmt(c.end)}</div><div class="tg-en">${c.name}</div><div class="tg-er">${c.room}</div>${dlBadges.join('')}`;
       col.appendChild(ev);
     });
 
-    // Firebase events for this day
-    const dayEvs=events.filter(e=>e.date===ds).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+    // non-class deadlines (COURSE_TASKS tasks on this day with no matching class)
+    const nonClsDl=[];
+    COURSE_TASKS.forEach(ct=>{
+      const cls=CLS_MAP[ct.id];
+      ct.tasks.forEach(t=>{
+        if(t.date===ds&&!clsSetThisDay.has(cls)){
+          nonClsDl.push({cls,label:t.label,graded:t.graded,urgent:t.urgent,done:!!courseProgress[t.id]});
+        }
+      });
+    });
+
+    // Firebase custom events (skip anything already shown via COURSE_TASKS)
+    const dayEvs=events.filter(e=>e.date===ds&&!isCourseTaskEvent(e)).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
     const timedEvs=dayEvs.filter(e=>e.time);
     const untimedEvs=dayEvs.filter(e=>!e.time);
 
@@ -1540,27 +1577,36 @@ function renderSchedule(){
       col.appendChild(ev);
     });
 
-    if(untimedEvs.length){
+    // top chips: non-class deadlines + untimed Firebase events
+    const allTopChips=[...nonClsDl.map(d=>({type:'dl',d})),...untimedEvs.map(e=>({type:'ev',e}))];
+    if(allTopChips.length){
       const wrap=document.createElement('div');
       wrap.className='tg-top-chips';
-      untimedEvs.forEach(e=>{
-        const clr=EV_COLORS[e.color||'green'];
+      allTopChips.forEach(item=>{
         const chip=document.createElement('div');
-        chip.className='tg-chip';
-        chip.style.borderLeftColor=clr?.hex||'var(--muted)';
-        chip.style.background=(clr?.hex||'#888')+'20';
-        chip.innerHTML=`<span>${e.title}</span>
-          <div class="tg-actions">
-            <button class="ev-edit-btn" onclick="openEvModal(${e.id})">✏️</button>
-            <button class="ev-del-btn" onclick="deleteEvent(${e.id})">✕</button>
-          </div>`;
+        if(item.type==='dl'){
+          const d=item.d;
+          chip.className=`tg-chip tg-${d.cls}${d.done?' done':''}`;
+          chip.innerHTML=`${d.graded?'📝 ':d.urgent?'⚡ ':'📌 '}<span>${d.label}</span>`;
+        }else{
+          const e=item.e;
+          const clr=EV_COLORS[e.color||'green'];
+          chip.className='tg-chip';
+          chip.style.borderLeftColor=clr?.hex||'var(--muted)';
+          chip.style.background=(clr?.hex||'#888')+'20';
+          chip.innerHTML=`<span>${e.title}</span>
+            <div class="tg-actions">
+              <button class="ev-edit-btn" onclick="openEvModal(${e.id})">✏️</button>
+              <button class="ev-del-btn" onclick="deleteEvent(${e.id})">✕</button>
+            </div>`;
+        }
         wrap.appendChild(chip);
       });
       col.appendChild(wrap);
     }
 
     const hasClasses=WEEKLY_CLASSES.some(c=>c.day===i+1);
-    if(!hasClasses&&!dayEvs.length&&!wknd){
+    if(!hasClasses&&!dayEvs.length&&!nonClsDl.length&&!wknd){
       const f=document.createElement('div');f.className='tg-freeday';
       f.innerHTML='No classes<br>· focus day ·';col.appendChild(f);
     }
