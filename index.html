@@ -459,6 +459,9 @@ header h1 em{font-style:italic;color:#c9aa8c;}
     </div>
     <div class="week-grid" id="week-grid"></div>
     <hr class="divider"/>
+    <div class="section-label">Upcoming Deadlines from Courses</div>
+    <div id="upcoming-deadlines" style="margin-bottom:1.5rem"></div>
+    <hr class="divider"/>
     <div class="section-label">Add Event</div>
     <div class="add-event-form">
       <div class="field"><label>EVENT TITLE</label><input type="text" id="ev-title" placeholder="Meeting, class, gym…"/></div>
@@ -903,6 +906,44 @@ function renderProgressCourses(){
         <span class="prog-chevron" id="prog-chev-${course.id}">▼</span>
       </div>
       <div class="prog-task-list" id="prog-list-${course.id}">${rows}</div>
+    </div>`;
+  }).join('');
+  renderUpcomingDeadlines();
+}
+
+function renderUpcomingDeadlines(){
+  const cont=document.getElementById('upcoming-deadlines');
+  if(!cont)return;
+  const todayStr=isoDate(new Date());
+  const limitStr=isoDate(new Date(Date.now()+60*24*3600*1000));
+  const colorHex={blue:'#4a80b5',teal:'#2a9a94',indigo:'#4a55b5'};
+  const colorTag={blue:'blue',teal:'teal',indigo:'indigo'};
+  const upcoming=[];
+  COURSE_TASKS.forEach(course=>{
+    course.tasks.forEach(t=>{
+      if(!courseProgress[t.id]&&t.date>=todayStr&&t.date<=limitStr)
+        upcoming.push({...t,courseColor:course.color});
+    });
+  });
+  upcoming.sort((a,b)=>a.date.localeCompare(b.date));
+  const shown=upcoming.slice(0,6);
+  if(!shown.length){
+    cont.innerHTML='<div class="empty"><span>🎉</span>All deadlines in the next 60 days are done!</div>';
+    return;
+  }
+  const sevenDays=isoDate(new Date(Date.now()+7*24*3600*1000));
+  cont.innerHTML=shown.map(t=>{
+    const d=new Date(t.date+'T00:00:00');
+    const dStr=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+    const diffDays=Math.ceil((d-new Date())/(24*3600*1000));
+    const daysLabel=diffDays<=0?'Today':diffDays===1?'Tomorrow':`${diffDays}d`;
+    const isSoon=t.date<=sevenDays;
+    return`<div class="kd-item" onclick="jumpToScheduleDate('${t.date}')">
+      <div class="kd-dot" style="background:${colorHex[t.courseColor]||'#888'}"></div>
+      <div class="kd-info"><div class="kd-title">${t.label}</div><div class="kd-sub">${dStr}</div></div>
+      ${t.graded?`<span class="kd-tag ${colorTag[t.courseColor]||'blue'}">GRADED</span>`:''}
+      ${isSoon?`<span class="prog-urgent">${daysLabel}</span>`:`<span class="kd-date">${daysLabel}</span>`}
+      <span class="kd-jump">→ Week</span>
     </div>`;
   }).join('');
 }
@@ -1399,6 +1440,7 @@ function renderSchedule(){
         </div>`).join('')}
     </div>`;
   }).join('');
+  renderUpcomingDeadlines();
 }
 
 function renderSchedOverview(){
