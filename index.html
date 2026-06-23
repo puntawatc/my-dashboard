@@ -12,6 +12,9 @@
   --accent:#c9553a;--accent-soft:#f0e0db;
   --green:#3a7d5a;--green-soft:#d9ede5;
   --muted:#8a8580;--border:#d4cec6;
+  --tr:#b07a5c;--tr-bg:#f0e4d9;--tr-tx:#6e4630;--tr-tm:#9c6a4a;
+  --rpa:#7d8a52;--rpa-bg:#e9ecdc;--rpa-tx:#4f5630;--rpa-tm:#5f6b3a;
+  --es:#a06b8f;--es-bg:#efe1ea;--es-tx:#5f3d54;--es-tm:#865674;
 }
 html{font-size:16px;}
 body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;min-height:100vh;padding-bottom:3rem;}
@@ -121,10 +124,53 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .annual-bar.has-data.sched{background:var(--green);border-color:var(--green);}
 
 /* WEEK / SCHEDULE */
-.week-nav{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.week-nav{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
 .week-nav span{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;flex:1;text-align:center;}
-.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.5rem;margin-bottom:2rem;}
-@media(max-width:600px){.week-grid{grid-template-columns:repeat(4,1fr);}}
+
+/* TIME-GRID */
+.tg-legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:1rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);}
+.tg-legend span{display:flex;align-items:center;gap:6px;}
+.tg-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;flex-shrink:0;}
+.tg-wrap{background:#fbf8f2;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.5rem;}
+.tg-grid{display:grid;grid-template-columns:52px repeat(7,1fr);border-top:1px solid var(--border);}
+.tg-dh{text-align:center;padding:10px 0 8px;border-right:1px solid var(--border);}
+.tg-dh:last-child{border-right:none;}
+.tg-dow{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+.tg-dnum{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;}
+.tg-dh.tg-today{background:#f9f2e6;border-top:2px solid var(--accent);}
+.tg-dh.tg-today .tg-dow,.tg-dh.tg-today .tg-dnum{color:var(--accent);}
+.tg-dh.tg-wknd .tg-dow,.tg-dh.tg-wknd .tg-dnum{opacity:.5;}
+.tg-gutter{position:relative;border-right:1px solid var(--border);}
+.tg-gutter span{position:absolute;right:4px;font-family:'DM Mono',monospace;font-size:.5rem;color:#bcb3a3;transform:translateY(-50%);}
+.tg-col{position:relative;border-right:1px solid var(--border);background:repeating-linear-gradient(#fbf8f2,#fbf8f2 63px,#ede7da 63px,#ede7da 64px);}
+.tg-col:last-child{border-right:none;}
+.tg-col.tg-wknd{background:#f5f2ec;}
+.tg-col.tg-today{background:#faf4ea;}
+.tg-ev{position:absolute;left:3px;right:3px;border-radius:5px;padding:5px 6px;overflow:hidden;cursor:default;}
+.tg-et{font-family:'DM Mono',monospace;font-size:.58rem;}
+.tg-en{font-size:.68rem;font-weight:600;line-height:1.25;margin-top:2px;}
+.tg-er{font-size:.58rem;margin-top:1px;opacity:.85;}
+.tg-ev.tg-tr{background:var(--tr-bg);border-left:3px solid var(--tr);}.tg-ev.tg-tr .tg-et,.tg-ev.tg-tr .tg-er{color:var(--tr-tm);}.tg-ev.tg-tr .tg-en{color:var(--tr-tx);}
+.tg-ev.tg-rpa{background:var(--rpa-bg);border-left:3px solid var(--rpa);}.tg-ev.tg-rpa .tg-et,.tg-ev.tg-rpa .tg-er{color:var(--rpa-tm);}.tg-ev.tg-rpa .tg-en{color:var(--rpa-tx);}
+.tg-ev.tg-es{background:var(--es-bg);border-left:3px solid var(--es);}.tg-ev.tg-es .tg-et,.tg-ev.tg-es .tg-er{color:var(--es-tm);}.tg-ev.tg-es .tg-en{color:var(--es-tx);}
+.tg-ev.tg-user{border-left:3px solid var(--muted);}
+.tg-ev .tg-actions{display:none;position:absolute;top:3px;right:3px;gap:2px;}
+.tg-ev:hover .tg-actions{display:flex;}
+.tg-freeday{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:.6rem;color:#cbb9a0;text-align:center;line-height:1.6;}
+.tg-top-chips{position:absolute;top:4px;left:3px;right:3px;display:flex;flex-direction:column;gap:3px;}
+.tg-chip{border-left:3px solid var(--muted);border-radius:4px;padding:3px 5px;font-size:.6rem;line-height:1.3;position:relative;}
+.tg-chip .tg-actions{display:none;position:absolute;top:2px;right:2px;}
+.tg-chip:hover .tg-actions{display:flex;}
+@media(max-width:700px){
+  .tg-grid{grid-template-columns:1fr;}
+  .tg-gutter,.tg-dh{display:none;}
+  .tg-col{height:auto!important;border-right:none;border-bottom:1px solid var(--border);background:var(--paper)!important;padding:10px 12px;display:flex;flex-direction:column;gap:6px;}
+  .tg-col::before{content:attr(data-label);font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:var(--muted);}
+  .tg-col.tg-today::before{color:var(--accent);}
+  .tg-ev{position:static!important;left:auto;right:auto;height:auto!important;}
+  .tg-top-chips{position:static;margin-bottom:4px;}
+  .tg-freeday{position:static;height:auto;justify-content:flex-start;}
+}
 .day-col{display:flex;flex-direction:column;gap:.4rem;}
 .day-header{text-align:center;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:var(--muted);padding-bottom:.4rem;border-bottom:1px solid var(--border);}
 .day-header span{display:block;font-size:1.1rem;font-family:'Fraunces',serif;font-weight:300;color:var(--ink);margin-top:.2rem;}
@@ -457,7 +503,13 @@ header h1 em{font-style:italic;color:#c9aa8c;}
       <span id="week-label"></span>
       <button class="btn btn-ghost" onclick="changeWeek(1)">Next →</button>
     </div>
-    <div class="week-grid" id="week-grid"></div>
+    <div class="tg-legend">
+      <span><i style="background:var(--tr)"></i>Translation · 001425</span>
+      <span><i style="background:var(--rpa)"></i>RPA · 703314</span>
+      <span><i style="background:var(--es)"></i>Essay Writing · 001218</span>
+      <span><i style="background:var(--muted);opacity:.6"></i>Custom Events</span>
+    </div>
+    <div class="tg-wrap"><div class="tg-grid" id="week-grid"></div></div>
     <hr class="divider"/>
     <div class="section-label">Upcoming Deadlines from Courses</div>
     <div id="upcoming-deadlines" style="margin-bottom:1.5rem"></div>
@@ -796,6 +848,19 @@ function setSyncStatus(state,msg){
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTHS_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const CAT_COLORS={Food:'#c9553a',Transport:'#4a80b5',Housing:'#3a7d5a',Health:'#8a6daa',Shopping:'#c5960a',Entertainment:'#c9aa8c',Other:'#8a8580'};
+const WEEKLY_CLASSES=[
+  {cls:'tr', name:'Translation',   code:'001425',room:'HB7705',        day:1,start:11,  end:12.5},
+  {cls:'tr', name:'Translation',   code:'001425',room:'HB7705',        day:4,start:11,  end:12.5},
+  {cls:'rpa',name:'RPA',           code:'703314',room:'BAB Lab Computer ชั้น 2',day:2,start:9.5, end:11},
+  {cls:'rpa',name:'RPA',           code:'703314',room:'BAB Lab Computer ชั้น 2',day:5,start:9.5, end:11},
+  {cls:'es', name:'Essay Writing', code:'001218',room:'HB7703',        day:2,start:14.5,end:16},
+  {cls:'es', name:'Essay Writing', code:'001218',room:'HB7703',        day:5,start:14.5,end:16},
+];
+const TG_PX=64,TG_START=9,TG_END=16.5,TG_H=(TG_END-TG_START)*TG_PX;
+const SEMESTER_END='2026-11-01'; // last day of semester (RPA final exam)
+function tgFmt(h){const hh=Math.floor(h),mm=Math.round((h-hh)*60);return hh+':'+String(mm).padStart(2,'0');}
+function tgTimeH(t){if(!t)return null;const[h,m]=t.split(':').map(Number);return h+m/60;}
+
 const EV_COLORS={
   green:{hex:'#3a7d5a',label:'Green'},red:{hex:'#c9553a',label:'Red'},blue:{hex:'#4a80b5',label:'Blue'},
   yellow:{hex:'#c5960a',label:'Yellow'},purple:{hex:'#8a4fbb',label:'Purple'},pink:{hex:'#c9508a',label:'Pink'},
@@ -1237,26 +1302,9 @@ window.jumpToToday=function(){
 //  SCHEDULE
 // ══════════════════════════════════════
 function seedSchedule(){
-  const endDate=new Date('2026-10-31');
-  const templates=[
-    {day:1,time:'11:00',title:'Translation 001425 (HB7705)',color:'blue'},
-    {day:2,time:'09:30',title:'RPA 703314 (BAB Lab Comp ชั้น 2)',color:'teal'},
-    {day:2,time:'14:30',title:'Essay Writing 001218 (HB7703)',color:'indigo'},
-    {day:4,time:'11:00',title:'Translation 001425 (HB7705)',color:'blue'},
-    {day:5,time:'09:30',title:'RPA 703314 (BAB Lab Comp ชั้น 2)',color:'teal'},
-    {day:5,time:'14:30',title:'Essay Writing 001218 (HB7703)',color:'indigo'},
-  ];
-  const start=new Date('2026-06-20'),list=[];
-  templates.forEach(t=>{
-    const first=new Date(start);
-    first.setDate(first.getDate()+(t.day-first.getDay()+7)%7);
-    let cur=new Date(first);
-    while(cur<=endDate){
-      list.push({id:Date.now()+Math.random(),title:t.title,date:isoDate(cur),time:t.time,color:t.color});
-      cur.setDate(cur.getDate()+7);
-    }
-  });
-  // One-time exam & deadline events
+  // Recurring weekly classes are rendered directly from WEEKLY_CLASSES in the time-grid.
+  // Firebase only stores one-time events (exams, deadlines, homework).
+  const list=[];
   const oneTime=[
     {date:'2026-06-26',time:'14:30',title:'HW Due: Essay Writing U1 L1 pp.1-12 + exercises',color:'indigo'},
     {date:'2026-07-20',time:'11:00',title:'Quiz I — Translation 001425',color:'blue'},
@@ -1416,30 +1464,109 @@ function getWeekDates(offset){
 function renderSchedule(){
   const days=getWeekDates(weekOffset);
   const todayStr=isoDate(new Date());
-  const DAY_NAMES=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const DAY_NAMES=['MON','TUE','WED','THU','FRI','SAT','SUN'];
   const first=days[0],last=days[6];
   document.getElementById('week-label').textContent=
     first.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' – '+
     last.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  document.getElementById('week-grid').innerHTML=days.map((d,i)=>{
-    const ds=isoDate(d),isToday=ds===todayStr;
-    const dayEvs=events.filter(e=>e.date===ds).sort((a,b)=>a.time.localeCompare(b.time));
-    const numEl=isToday?`<span class="day-num-wrap">${d.getDate()}</span>`:`<span>${d.getDate()}</span>`;
-    return`<div class="day-col">
-      <div class="day-header${isToday?' today':''}">
-        ${DAY_NAMES[i]}<br>${numEl}
-      </div>
-      ${dayEvs.map(e=>`
-        <div class="event-block ev-${e.color||'green'}">
-          ${e.time?`<div class="ev-time">${e.time}</div>`:''}
-          <div>${e.title}</div>
-          <div class="ev-actions">
-            <button class="ev-edit-btn" onclick="openEvModal(${e.id})" title="Edit">✏️</button>
-            <button class="ev-del-btn"  onclick="deleteEvent(${e.id})" title="Delete">✕</button>
-          </div>
-        </div>`).join('')}
-    </div>`;
-  }).join('');
+
+  const grid=document.getElementById('week-grid');
+  grid.innerHTML='';
+
+  // blank cell above gutter
+  const blankDh=document.createElement('div');
+  blankDh.className='tg-dh';blankDh.style.borderTop='none';
+  grid.appendChild(blankDh);
+
+  // day header row
+  days.forEach((d,i)=>{
+    const isToday=isoDate(d)===todayStr,wknd=i>=5;
+    const dh=document.createElement('div');
+    dh.className='tg-dh'+(isToday?' tg-today':'')+(wknd&&!isToday?' tg-wknd':'');
+    dh.innerHTML=`<div class="tg-dow">${DAY_NAMES[i]}</div><div class="tg-dnum">${d.getDate()}</div>`;
+    grid.appendChild(dh);
+  });
+
+  // time gutter
+  const g=document.createElement('div');
+  g.className='tg-gutter';g.style.height=TG_H+'px';
+  for(let h=TG_START;h<=Math.floor(TG_END);h++){
+    const sp=document.createElement('span');
+    sp.style.top=((h-TG_START)*TG_PX)+'px';
+    sp.textContent=h+':00';
+    g.appendChild(sp);
+  }
+  grid.appendChild(g);
+
+  // 7 day columns
+  days.forEach((d,i)=>{
+    const ds=isoDate(d),isToday=ds===todayStr,wknd=i>=5;
+    const col=document.createElement('div');
+    col.className='tg-col'+(isToday?' tg-today':'')+(wknd?' tg-wknd':'');
+    col.style.height=TG_H+'px';
+    col.dataset.label=DAY_NAMES[i]+' '+d.getDate();
+
+    // recurring weekly classes (only within semester)
+    WEEKLY_CLASSES.filter(c=>c.day===i+1&&ds<=SEMESTER_END).forEach(c=>{
+      const ev=document.createElement('div');
+      ev.className='tg-ev tg-'+c.cls;
+      ev.style.top=((c.start-TG_START)*TG_PX)+'px';
+      ev.style.height=((c.end-c.start)*TG_PX)+'px';
+      ev.innerHTML=`<div class="tg-et">${tgFmt(c.start)}–${tgFmt(c.end)}</div><div class="tg-en">${c.name}</div><div class="tg-er">${c.room}</div>`;
+      col.appendChild(ev);
+    });
+
+    // Firebase events for this day
+    const dayEvs=events.filter(e=>e.date===ds).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+    const timedEvs=dayEvs.filter(e=>e.time);
+    const untimedEvs=dayEvs.filter(e=>!e.time);
+
+    timedEvs.forEach(e=>{
+      const h=tgTimeH(e.time);
+      if(h===null)return;
+      const clr=EV_COLORS[e.color||'green'];
+      const ev=document.createElement('div');
+      ev.className='tg-ev tg-user';
+      ev.style.borderLeftColor=clr?.hex||'var(--muted)';
+      ev.style.background=(clr?.hex||'#888')+'28';
+      const inRange=h>=TG_START&&h<TG_END;
+      ev.style.top=(inRange?(h-TG_START)*TG_PX:4)+'px';
+      ev.style.height=TG_PX*0.75+'px';
+      ev.innerHTML=`<div class="tg-et" style="color:${clr?.hex||'var(--muted)'}">${e.time}</div><div class="tg-en">${e.title}</div>
+        <div class="tg-actions">
+          <button class="ev-edit-btn" onclick="openEvModal(${e.id})">✏️</button>
+          <button class="ev-del-btn" onclick="deleteEvent(${e.id})">✕</button>
+        </div>`;
+      col.appendChild(ev);
+    });
+
+    if(untimedEvs.length){
+      const wrap=document.createElement('div');
+      wrap.className='tg-top-chips';
+      untimedEvs.forEach(e=>{
+        const clr=EV_COLORS[e.color||'green'];
+        const chip=document.createElement('div');
+        chip.className='tg-chip';
+        chip.style.borderLeftColor=clr?.hex||'var(--muted)';
+        chip.style.background=(clr?.hex||'#888')+'20';
+        chip.innerHTML=`<span>${e.title}</span>
+          <div class="tg-actions">
+            <button class="ev-edit-btn" onclick="openEvModal(${e.id})">✏️</button>
+            <button class="ev-del-btn" onclick="deleteEvent(${e.id})">✕</button>
+          </div>`;
+        wrap.appendChild(chip);
+      });
+      col.appendChild(wrap);
+    }
+
+    const hasClasses=WEEKLY_CLASSES.some(c=>c.day===i+1);
+    if(!hasClasses&&!dayEvs.length&&!wknd){
+      const f=document.createElement('div');f.className='tg-freeday';
+      f.innerHTML='No classes<br>· focus day ·';col.appendChild(f);
+    }
+    grid.appendChild(col);
+  });
+
   renderUpcomingDeadlines();
 }
 
