@@ -213,6 +213,10 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .kd-tag.blue{background:#dce8f5;color:#4a80b5;}
 .kd-tag.teal{background:#d9f0ef;color:#2a9a94;}
 .kd-tag.indigo{background:#dde0f5;color:#4a55b5;}
+.kd-item{cursor:pointer;transition:border-color .15s,box-shadow .15s;}
+.kd-item:hover{border-color:var(--green);box-shadow:0 2px 8px rgba(58,125,90,.08);}
+.kd-jump{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--green);opacity:0;transition:opacity .15s;white-space:nowrap;padding-left:.5rem;}
+.kd-item:hover .kd-jump{opacity:1;}
 
 .syllabus-section{margin-bottom:2rem;}
 .syllabus-table{width:100%;border-collapse:collapse;font-size:.82rem;}
@@ -240,6 +244,31 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .sb-study{background:#3a3a55;color:#c9aa8c;border:1px dashed #5a5a75;}
 .sb-review{background:#3a3a55;color:#8a9acf;border:1px dashed #5a5a75;}
 .sb-rest{color:#5a5a75;text-align:center;font-size:.65rem;padding:.3rem 0;}
+
+/* PROGRESS CHECKLIST */
+.prog-course-wrap{margin-bottom:.75rem;background:#fff;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+.prog-course-head{display:flex;align-items:center;gap:1rem;padding:.9rem 1.2rem;cursor:pointer;user-select:none;}
+.prog-course-head:hover{background:var(--warm-mid);}
+.prog-course-name{font-size:.92rem;font-weight:500;flex:1;}
+.prog-bar-row{display:flex;align-items:center;gap:.5rem;}
+.prog-track{width:90px;height:5px;background:var(--warm-mid);border-radius:10px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:10px;transition:width .4s ease;}
+.prog-fill.blue{background:#4a80b5;}.prog-fill.teal{background:#2a9a94;}.prog-fill.indigo{background:#4a55b5;}
+.prog-pct{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);min-width:30px;}
+.prog-chevron{font-size:.75rem;color:var(--muted);transition:transform .2s;margin-left:.25rem;}
+.prog-chevron.open{transform:rotate(180deg);}
+.prog-task-list{border-top:1px solid var(--border);display:none;}
+.prog-task-list.open{display:block;}
+.prog-task{display:flex;align-items:center;gap:.75rem;padding:.55rem 1.2rem;cursor:pointer;transition:background .1s;}
+.prog-task:hover{background:var(--warm-mid);}
+.prog-task input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--green);flex-shrink:0;}
+.prog-task-label{font-size:.84rem;flex:1;line-height:1.3;}
+.prog-task-label.done{text-decoration:line-through;color:var(--muted);}
+.prog-task-date{font-family:'DM Mono',monospace;font-size:.66rem;color:var(--muted);white-space:nowrap;}
+.prog-task-date.overdue{color:var(--accent);font-weight:500;}
+.prog-task-date.soon{color:#c5960a;font-weight:500;}
+.prog-graded{font-family:'DM Mono',monospace;font-size:.6rem;padding:.1rem .4rem;border-radius:10px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;flex-shrink:0;}
+.prog-urgent{font-family:'DM Mono',monospace;font-size:.6rem;padding:.1rem .4rem;border-radius:10px;background:#fdf3d9;color:#c5960a;white-space:nowrap;flex-shrink:0;}
 
 /* ── MODAL ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(26,26,46,.55);backdrop-filter:blur(3px);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;}
@@ -505,7 +534,7 @@ header h1 em{font-style:italic;color:#c9aa8c;}
     <div class="course-card c-teal">
       <div class="course-card-header">
         <span class="course-code">703314</span>
-        <span class="course-badge waiting">⏳ Waiting List</span>
+        <span class="course-badge enrolled">✓ Enrolled</span>
       </div>
       <div class="course-name">Robotic Process Automation for Business</div>
       <div class="course-meta">
@@ -523,7 +552,7 @@ header h1 em{font-style:italic;color:#c9aa8c;}
     <div class="course-card c-indigo">
       <div class="course-card-header">
         <span class="course-code">001218</span>
-        <span class="course-badge waiting">⏳ Waiting List</span>
+        <span class="course-badge enrolled">✓ Enrolled</span>
       </div>
       <div class="course-name">Essay Writing</div>
       <div class="course-meta">
@@ -544,23 +573,27 @@ header h1 em{font-style:italic;color:#c9aa8c;}
   </div>
 
   <hr class="divider"/>
+  <div class="section-label">Tasks &amp; Progress</div>
+  <div id="progress-courses"></div>
+
+  <hr class="divider"/>
   <div class="section-label">Key Dates &amp; Deadlines</div>
   <div class="key-dates-list">
-    <div class="kd-item"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz I</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Jul 20</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Outline Essay I (5%)</div><div class="kd-sub">001218 Essay Writing · Written in class ~150–200 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Jul 24</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Project 1 — RPA with UiPath</div><div class="kd-sub">703314 RPA · Submit &amp; present</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Aug 7</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz II</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Aug 13</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Final Draft Essay I (15%)</div><div class="kd-sub">001218 Essay Writing · Causal Analysis, 450–500 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Aug 18</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Midterm Exam · Essay Writing</div><div class="kd-sub">001218 · Causal analysis essay, 450–500 words (paper dict. allowed)</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Aug 28 · 08:00–11:00</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Midterm Exam · Translation</div><div class="kd-sub">001425 · Reading week Aug 17–23 before exam</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Aug 30 · 15:30–18:30</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Project 2 — Agentic Automation</div><div class="kd-sub">703314 RPA · Submit &amp; present (Make + LLM)</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Sep 11</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Outline Essay II (5%)</div><div class="kd-sub">001218 Essay Writing · Written in class ~150–200 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Sep 18</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Capstone Presentation</div><div class="kd-sub">703314 RPA · Full automation pipeline</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Sep 29</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Final Draft Essay II (15%)</div><div class="kd-sub">001218 Essay Writing · Opinion essay, 450–500 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Oct 13</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz IV</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Oct 15</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Final Exam · Essay Writing</div><div class="kd-sub">001218 · Opinion essay, 450–500 words (paper dict. allowed)</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Oct 21 · 08:00–11:00</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Final Exam · Translation</div><div class="kd-sub">001425 · Audio-visual texts focus</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Oct 22 · 12:00–15:00</span></div>
-    <div class="kd-item"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Final Exam · RPA</div><div class="kd-sub">703314 · 30% of grade</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Nov 1 · 15:30–18:30</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-07-20')"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz I</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Jul 20</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-07-24')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Outline Essay I (5%)</div><div class="kd-sub">001218 Essay Writing · Written in class ~150–200 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Jul 24</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-07')"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Project 1 — RPA with UiPath</div><div class="kd-sub">703314 RPA · Submit &amp; present</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Aug 7</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-13')"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz II</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Aug 13</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-18')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Final Draft Essay I (15%)</div><div class="kd-sub">001218 Essay Writing · Causal Analysis, 450–500 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Aug 18</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-28')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Midterm Exam · Essay Writing</div><div class="kd-sub">001218 · Causal analysis essay, 450–500 words (paper dict. allowed)</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Aug 28 · 08:00–11:00</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-30')"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Midterm Exam · Translation</div><div class="kd-sub">001425 · Reading week Aug 17–23 before exam</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Aug 30 · 15:30–18:30</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-09-11')"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Project 2 — Agentic Automation</div><div class="kd-sub">703314 RPA · Submit &amp; present (Make + LLM)</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Sep 11</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-09-18')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Outline Essay II (5%)</div><div class="kd-sub">001218 Essay Writing · Written in class ~150–200 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Sep 18</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-09-29')"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Capstone Presentation</div><div class="kd-sub">703314 RPA · Full automation pipeline</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Sep 29</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-13')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Final Draft Essay II (15%)</div><div class="kd-sub">001218 Essay Writing · Opinion essay, 450–500 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Oct 13</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-15')"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz IV</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Oct 15</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-21')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Final Exam · Essay Writing</div><div class="kd-sub">001218 · Opinion essay, 450–500 words (paper dict. allowed)</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Oct 21 · 08:00–11:00</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-22')"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Final Exam · Translation</div><div class="kd-sub">001425 · Audio-visual texts focus</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Oct 22 · 12:00–15:00</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-11-01')"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Final Exam · RPA</div><div class="kd-sub">703314 · 30% of grade</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Nov 1 · 15:30–18:30</span><span class="kd-jump">→ Schedule</span></div>
   </div>
 
   <hr class="divider"/>
@@ -766,8 +799,61 @@ const EV_COLORS={
   orange:{hex:'#d4702a',label:'Orange'},teal:{hex:'#2a9a94',label:'Teal'},indigo:{hex:'#4a55b5',label:'Indigo'},rose:{hex:'#b54a55',label:'Rose'}
 };
 
+// ── COURSE TASKS ──
+const COURSE_TASKS=[
+  {id:'trans',label:'001425 · Translation for Professional Purposes',color:'blue',tasks:[
+    {id:'trans-book',  label:'Buy course coupon / textbook',                              date:'2026-06-22'},
+    {id:'trans-w1',    label:'Week 1: Attend Introduction classes',                       date:'2026-06-25'},
+    {id:'trans-w2-4',  label:'Weeks 2–4: Academic texts sessions',                       date:'2026-07-16'},
+    {id:'trans-quiz1', label:'Quiz I (in-class)',                                          date:'2026-07-20',graded:true},
+    {id:'trans-w5-8',  label:'Weeks 5–8: Mass-media texts sessions',                     date:'2026-08-13'},
+    {id:'trans-quiz2', label:'Quiz II (in-class)',                                         date:'2026-08-13',graded:true},
+    {id:'trans-readwk',label:'Reading week — prepare for midterm',                       date:'2026-08-23'},
+    {id:'trans-mid',   label:'Midterm Exam',                                               date:'2026-08-30',graded:true},
+    {id:'trans-w11-13',label:'Weeks 11–13: Legal texts sessions',                        date:'2026-09-17'},
+    {id:'trans-quiz3', label:'Quiz III (in-class)',                                        date:'2026-09-21',graded:true},
+    {id:'trans-w14-17',label:'Weeks 14–17: Audio-visual texts sessions',                 date:'2026-10-15'},
+    {id:'trans-quiz4', label:'Quiz IV (in-class)',                                         date:'2026-10-15',graded:true},
+    {id:'trans-final', label:'Final Exam',                                                 date:'2026-10-22',graded:true},
+  ]},
+  {id:'rpa',label:'703314 · Robotic Process Automation',color:'teal',tasks:[
+    {id:'rpa-w1',       label:'Week 1: Intro classes — automation in business',           date:'2026-06-26'},
+    {id:'rpa-w2',       label:'Week 2: Process selection & BPM Lifecycle',                date:'2026-07-03'},
+    {id:'rpa-w3',       label:'Week 3: Install UiPath + recording basics',                date:'2026-07-10'},
+    {id:'rpa-w4',       label:'Week 4: Variables, control flow & UI automation',          date:'2026-07-17'},
+    {id:'rpa-w5',       label:'Week 5: Excel, PDF & email automation',                    date:'2026-07-24'},
+    {id:'rpa-proj1-wk', label:'Weeks 6–7: Error handling + build Project 1',             date:'2026-08-07'},
+    {id:'rpa-proj1',    label:'Submit & present Project 1 — UiPath RPA (10%)',            date:'2026-08-07',graded:true},
+    {id:'rpa-w8-10',    label:'Weeks 8–10: Make workflows + LLM in workflow',             date:'2026-08-28'},
+    {id:'rpa-w11',      label:'Week 11: Design AI Agent + start Project 2',               date:'2026-09-04'},
+    {id:'rpa-proj2',    label:'Submit & present Project 2 — Agentic automation (15%)',    date:'2026-09-11',graded:true},
+    {id:'rpa-w13',      label:'Week 13: Hyperautomation + start Capstone',                date:'2026-09-18'},
+    {id:'rpa-capstone', label:'Capstone Presentation (15%)',                               date:'2026-09-29',graded:true},
+    {id:'rpa-final',    label:'Final Exam (30%)',                                          date:'2026-11-01',graded:true},
+  ]},
+  {id:'essay',label:'001218 · Essay Writing',color:'indigo',tasks:[
+    {id:'essay-book',    label:'Buy textbook (190 Baht)',                                  date:'2026-06-23'},
+    {id:'essay-hw1',     label:'HW: Self-study U1 L1 pp.1–12 + complete all exercises',  date:'2026-06-27',urgent:true},
+    {id:'essay-w1-2',    label:'Weeks 1–2: Unit 1 – Introduction to Essay Writing',       date:'2026-07-03'},
+    {id:'essay-topic1',  label:'Assignment 1: Topic selection for Essay I',                date:'2026-07-10'},
+    {id:'essay-outline1-prep',label:'Assignment 2: Prepare outline for Essay I',          date:'2026-07-21'},
+    {id:'essay-outline1-class',label:'Write outline Essay I in class (5%)',               date:'2026-07-24',graded:true},
+    {id:'essay-draft1',  label:'Assignment 3: Write first draft Essay I (300–350 words)', date:'2026-08-07'},
+    {id:'essay-peer1',   label:'Peer-review first draft of Essay I in class',             date:'2026-08-11'},
+    {id:'essay-final1',  label:'Assignment 4: Submit Final Draft Essay I (15%)',          date:'2026-08-18',graded:true},
+    {id:'essay-mid',     label:'Midterm Exam — Causal Analysis essay 450–500 words (30%)',date:'2026-08-28',graded:true},
+    {id:'essay-topic2',  label:'Assignment 1: Topic selection for Essay II',              date:'2026-09-11'},
+    {id:'essay-outline2-prep',label:'Assignment 2: Prepare outline for Essay II',        date:'2026-09-15'},
+    {id:'essay-outline2-class',label:'Write outline Essay II in class (5%)',              date:'2026-09-18',graded:true},
+    {id:'essay-draft2',  label:'Assignment 3: Write first draft Essay II (300–350 words)',date:'2026-10-02'},
+    {id:'essay-peer2',   label:'Peer-review first draft of Essay II in class',            date:'2026-10-06'},
+    {id:'essay-final2',  label:'Assignment 4: Submit Final Draft Essay II (15%)',         date:'2026-10-13',graded:true},
+    {id:'essay-final',   label:'Final Exam — Opinion essay 450–500 words (30%)',          date:'2026-10-21',graded:true},
+  ]},
+];
+
 // ── STATE ──
-let expenses=[],budgets={},events=[],settings={currency:'฿'};
+let expenses=[],budgets={},events=[],settings={currency:'฿'},courseProgress={};
 const now=new Date();
 let viewYear=now.getFullYear(),viewMonth=now.getMonth(),weekOffset=0;
 let editingExpId=null,editingEvId=null,selectedColor='green',modalSelectedColor='green';
@@ -780,6 +866,61 @@ async function fbSet(path,data){
   catch(e){setSyncStatus('error','Save failed');console.error(e);}
 }
 
+// ── PROGRESS ──
+function renderProgressCourses(){
+  const todayStr=isoDate(new Date());
+  const sevenDays=isoDate(new Date(Date.now()+7*24*3600*1000));
+  const cont=document.getElementById('progress-courses');
+  if(!cont)return;
+  cont.innerHTML=COURSE_TASKS.map(course=>{
+    const done=course.tasks.filter(t=>courseProgress[t.id]).length;
+    const total=course.tasks.length;
+    const pct=total?Math.round(done/total*100):0;
+    const rows=course.tasks.map(t=>{
+      const checked=!!courseProgress[t.id];
+      let dateClass='',dateSuffix='';
+      if(!checked){
+        if(t.date<todayStr){dateClass='overdue';dateSuffix=' ⚠';}
+        else if(t.date<=sevenDays){dateClass='soon';}
+      }
+      const d=new Date(t.date+'T00:00:00');
+      const dStr=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      return`<label class="prog-task">
+        <input type="checkbox" ${checked?'checked':''} onchange="toggleTask('${t.id}')"/>
+        <span class="prog-task-label${checked?' done':''}">${t.label}</span>
+        ${t.urgent&&!checked?`<span class="prog-urgent">DUE SOON</span>`:''}
+        ${t.graded&&!checked?`<span class="prog-graded">GRADED</span>`:''}
+        <span class="prog-task-date${checked?'':' '+dateClass}">${dStr}${dateSuffix}</span>
+      </label>`;
+    }).join('');
+    return`<div class="prog-course-wrap">
+      <div class="prog-course-head" onclick="toggleProgSection('${course.id}')">
+        <span class="prog-course-name">${course.label}</span>
+        <div class="prog-bar-row">
+          <div class="prog-track"><div class="prog-fill ${course.color}" id="prog-fill-${course.id}" style="width:${pct}%"></div></div>
+          <span class="prog-pct">${done}/${total}</span>
+        </div>
+        <span class="prog-chevron" id="prog-chev-${course.id}">▼</span>
+      </div>
+      <div class="prog-task-list" id="prog-list-${course.id}">${rows}</div>
+    </div>`;
+  }).join('');
+}
+
+window.toggleProgSection=function(id){
+  const list=document.getElementById('prog-list-'+id);
+  const chev=document.getElementById('prog-chev-'+id);
+  if(!list)return;
+  const open=list.classList.toggle('open');
+  chev.classList.toggle('open',open);
+};
+
+window.toggleTask=async function(taskId){
+  courseProgress[taskId]=!courseProgress[taskId];
+  await fbSet('progress',{tasks:courseProgress});
+  renderProgressCourses();
+};
+
 function startListeners(){
   onSnapshot(uDoc('expenses'),s=>{expenses=s.exists()?(s.data().list||[]):[];refreshMonthView();setSyncStatus('synced','Up to date');});
   onSnapshot(uDoc('budgets'), s=>{budgets=s.exists()?(s.data().map||[]):{};refreshMonthView();});
@@ -787,15 +928,18 @@ function startListeners(){
   onSnapshot(uDoc('settings'),s=>{
     if(s.exists()){settings=s.data();document.getElementById('currency-select').value=settings.currency||'฿';}
   });
+  onSnapshot(uDoc('progress'),s=>{courseProgress=s.exists()?(s.data().tasks||{}):{};renderProgressCourses();});
 }
 
 async function init(){
   document.getElementById('loading-msg').textContent='Loading your data…';
   try{
-    const[eS,bS,evS,sS]=await Promise.all([getDoc(uDoc('expenses')),getDoc(uDoc('budgets')),getDoc(uDoc('events')),getDoc(uDoc('settings'))]);
+    const[eS,bS,evS,sS,prS]=await Promise.all([getDoc(uDoc('expenses')),getDoc(uDoc('budgets')),getDoc(uDoc('events')),getDoc(uDoc('settings')),getDoc(uDoc('progress'))]);
     expenses=eS.exists()?(eS.data().list||[]):[];
     budgets=bS.exists()?(bS.data().map||{}):{};
     settings=sS.exists()?sS.data():{currency:'฿'};
+    courseProgress=prS.exists()?(prS.data().tasks||{}):{};
+    renderProgressCourses();
     let evList=evS.exists()?(evS.data().list||[]):[];
     if(!evS.exists()||evList.length===0){evList=seedSchedule();await fbSet('events',{list:evList});}
     events=evList;
@@ -1295,6 +1439,21 @@ function renderSchedOverview(){
   document.getElementById('sched-ov-items').textContent=tot;
   document.getElementById('sched-ov-avg').textContent=mWE>0?Math.round(tot/mWE):'—';
 }
+
+window.jumpToScheduleDate=function(dateStr){
+  const target=new Date(dateStr+'T00:00:00');
+  const today=new Date();
+  const todayDow=today.getDay();
+  const targetDow=target.getDay();
+  const todayMonday=new Date(today);
+  todayMonday.setDate(today.getDate()-(todayDow===0?6:todayDow-1));
+  const targetMonday=new Date(target);
+  targetMonday.setDate(target.getDate()-(targetDow===0?6:targetDow-1));
+  weekOffset=Math.round((targetMonday-todayMonday)/(7*24*3600*1000));
+  switchTab('schedule');
+  switchSchedSubTab('week');
+  renderSchedule();
+};
 
 window.jumpToWeekOfMonth=function(key){
   const[y,m]=key.split('-').map(Number);
