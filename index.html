@@ -183,6 +183,64 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .empty span{display:block;font-size:2rem;margin-bottom:.5rem;}
 .divider{border:none;border-top:1.5px solid var(--border);margin:1.5rem 0;}
 
+/* COURSES TAB */
+.course-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:2rem;}
+.course-card{background:#fff;border-radius:12px;border:1.5px solid var(--border);padding:1.25rem 1.4rem;border-top-width:4px;}
+.course-card.c-blue{border-top-color:#4a80b5;}
+.course-card.c-teal{border-top-color:#2a9a94;}
+.course-card.c-indigo{border-top-color:#4a55b5;}
+.course-card-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;}
+.course-code{font-family:'DM Mono',monospace;font-size:.75rem;font-weight:500;color:var(--muted);}
+.course-badge{font-family:'DM Mono',monospace;font-size:.62rem;padding:.15rem .55rem;border-radius:20px;letter-spacing:.04em;}
+.course-badge.enrolled{background:#d9ede5;color:#3a7d5a;}
+.course-badge.waiting{background:#fdf3d9;color:#c5960a;}
+.course-name{font-family:'Fraunces',serif;font-weight:300;font-size:1.1rem;line-height:1.3;margin-bottom:.75rem;}
+.course-meta{display:flex;flex-direction:column;gap:.3rem;font-size:.82rem;color:var(--muted);}
+.course-meta span{display:flex;align-items:center;gap:.4rem;}
+.course-exams{margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:.35rem;}
+.exam-item{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;}
+.exam-label{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.04em;}
+.exam-date{font-weight:500;color:var(--ink);}
+
+.key-dates-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem;}
+.kd-item{display:flex;align-items:center;gap:.85rem;padding:.75rem 1rem;background:#fff;border-radius:8px;border:1.5px solid var(--border);}
+.kd-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.kd-info{flex:1;}
+.kd-title{font-size:.9rem;font-weight:500;}
+.kd-sub{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);margin-top:.1rem;}
+.kd-date{font-family:'Fraunces',serif;font-size:.95rem;font-weight:600;color:var(--ink);white-space:nowrap;}
+.kd-tag{font-family:'DM Mono',monospace;font-size:.62rem;padding:.15rem .5rem;border-radius:10px;white-space:nowrap;}
+.kd-tag.blue{background:#dce8f5;color:#4a80b5;}
+.kd-tag.teal{background:#d9f0ef;color:#2a9a94;}
+.kd-tag.indigo{background:#dde0f5;color:#4a55b5;}
+
+.syllabus-section{margin-bottom:2rem;}
+.syllabus-table{width:100%;border-collapse:collapse;font-size:.82rem;}
+.syllabus-table th{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:var(--muted);padding:.5rem .75rem;text-align:left;border-bottom:1.5px solid var(--border);}
+.syllabus-table td{padding:.55rem .75rem;border-bottom:1px solid var(--warm-mid);vertical-align:top;}
+.syllabus-table tr:last-child td{border-bottom:none;}
+.syllabus-table tr.highlight td{background:var(--accent-soft);}
+.syllabus-table tr.highlight-teal td{background:#d9f0ef;}
+.wk-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);white-space:nowrap;}
+.wk-date{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);white-space:nowrap;}
+.wk-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:.62rem;padding:.1rem .45rem;border-radius:10px;margin-left:.4rem;}
+.wk-badge.exam{background:var(--accent-soft);color:var(--accent);}
+.wk-badge.project{background:#d9f0ef;color:#2a9a94;}
+.wk-badge.holiday{background:var(--warm-mid);color:var(--muted);}
+.study-plan-box{background:var(--ink);color:var(--paper);border-radius:12px;padding:1.5rem;margin-bottom:2rem;}
+.study-plan-box h3{font-family:'Fraunces',serif;font-weight:300;font-size:1.2rem;margin-bottom:1rem;}
+.study-plan-box h3 em{font-style:italic;color:#c9aa8c;}
+.study-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.4rem;}
+.study-day{display:flex;flex-direction:column;gap:.3rem;}
+.study-day-name{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.06em;color:#9a9585;text-align:center;padding-bottom:.3rem;border-bottom:1px solid #3a3a55;}
+.study-block{font-size:.65rem;padding:.3rem .4rem;border-radius:4px;line-height:1.3;text-align:center;}
+.sb-class{background:#dce8f5;color:#4a80b5;}
+.sb-class.teal{background:#d9f0ef;color:#2a9a94;}
+.sb-class.indigo{background:#dde0f5;color:#4a55b5;}
+.sb-study{background:#3a3a55;color:#c9aa8c;border:1px dashed #5a5a75;}
+.sb-review{background:#3a3a55;color:#8a9acf;border:1px dashed #5a5a75;}
+.sb-rest{color:#5a5a75;text-align:center;font-size:.65rem;padding:.3rem 0;}
+
 /* ── MODAL ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(26,26,46,.55);backdrop-filter:blur(3px);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;}
 .modal-overlay.hidden{display:none;}
@@ -267,6 +325,7 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 <nav class="tabs">
   <button class="tab-btn active" onclick="switchTab('spending')">💸 Spending</button>
   <button class="tab-btn" onclick="switchTab('schedule')">📅 Schedule</button>
+  <button class="tab-btn" onclick="switchTab('courses')">📚 Courses</button>
 </nav>
 
 <!-- ═══ SPENDING TAB ═══ -->
@@ -419,6 +478,203 @@ header h1 em{font-style:italic;color:#c9aa8c;}
   </div>
 </div>
 
+<!-- ═══ COURSES TAB ═══ -->
+<div id="tab-courses" class="tab-panel">
+
+  <div class="section-label">Semester 1/2026 — Enrolled Subjects</div>
+  <div class="course-cards">
+    <div class="course-card c-blue">
+      <div class="course-card-header">
+        <span class="course-code">001425</span>
+        <span class="course-badge enrolled">✓ Enrolled</span>
+      </div>
+      <div class="course-name">Translation for Professional Purposes</div>
+      <div class="course-meta">
+        <span>📅 Monday &amp; Thursday</span>
+        <span>🕐 11:00 – 12:30</span>
+        <span>📍 Room HB7705</span>
+      </div>
+      <div class="course-exams">
+        <div class="exam-item"><span class="exam-label">QUIZ I</span><span class="exam-date">Jul 20</span></div>
+        <div class="exam-item"><span class="exam-label">QUIZ II</span><span class="exam-date">Aug 13</span></div>
+        <div class="exam-item"><span class="exam-label">MIDTERM</span><span class="exam-date">Aug 30 · 15:30–18:30</span></div>
+        <div class="exam-item"><span class="exam-label">QUIZ IV</span><span class="exam-date">Oct 15</span></div>
+        <div class="exam-item"><span class="exam-label">FINAL</span><span class="exam-date">Oct 22 · 12:00–15:00</span></div>
+      </div>
+    </div>
+    <div class="course-card c-teal">
+      <div class="course-card-header">
+        <span class="course-code">703314</span>
+        <span class="course-badge waiting">⏳ Waiting List</span>
+      </div>
+      <div class="course-name">Robotic Process Automation for Business</div>
+      <div class="course-meta">
+        <span>📅 Tuesday &amp; Friday</span>
+        <span>🕐 9:30 – 11:00</span>
+        <span>📍 BAB Lab Computer ชั้น 2</span>
+      </div>
+      <div class="course-exams">
+        <div class="exam-item"><span class="exam-label">PROJECT 1 (UiPath)</span><span class="exam-date">Aug 7</span></div>
+        <div class="exam-item"><span class="exam-label">PROJECT 2 (Agentic)</span><span class="exam-date">Sep 11</span></div>
+        <div class="exam-item"><span class="exam-label">CAPSTONE</span><span class="exam-date">Sep 29</span></div>
+        <div class="exam-item"><span class="exam-label">FINAL EXAM</span><span class="exam-date">Nov 1 · 15:30–18:30</span></div>
+      </div>
+    </div>
+    <div class="course-card c-indigo">
+      <div class="course-card-header">
+        <span class="course-code">001218</span>
+        <span class="course-badge waiting">⏳ Waiting List</span>
+      </div>
+      <div class="course-name">Essay Writing</div>
+      <div class="course-meta">
+        <span>📅 Tuesday &amp; Friday</span>
+        <span>🕐 14:30 – 16:00</span>
+        <span>📍 Room HB7703</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+  <div class="section-label">Key Dates &amp; Deadlines</div>
+  <div class="key-dates-list">
+    <div class="kd-item"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz I</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Jul 20</span></div>
+    <div class="kd-item"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Project 1 — RPA with UiPath</div><div class="kd-sub">703314 RPA · Submit &amp; present</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Aug 7</span></div>
+    <div class="kd-item"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz II</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Aug 13</span></div>
+    <div class="kd-item"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Midterm Exam · Translation</div><div class="kd-sub">001425 · Reading week Aug 17–23 before exam</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Aug 30 · 15:30–18:30</span></div>
+    <div class="kd-item"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Project 2 — Agentic Automation</div><div class="kd-sub">703314 RPA · Submit &amp; present (Make + LLM)</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Sep 11</span></div>
+    <div class="kd-item"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Capstone Presentation</div><div class="kd-sub">703314 RPA · Full automation pipeline</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Sep 29</span></div>
+    <div class="kd-item"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz IV</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Oct 15</span></div>
+    <div class="kd-item"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Final Exam · Translation</div><div class="kd-sub">001425 · Audio-visual texts focus</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Oct 22 · 12:00–15:00</span></div>
+    <div class="kd-item"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Final Exam · RPA</div><div class="kd-sub">703314 · 30% of grade</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Nov 1 · 15:30–18:30</span></div>
+  </div>
+
+  <hr class="divider"/>
+  <div class="study-plan-box">
+    <h3>Weekly <em>Study Plan</em></h3>
+    <div class="study-grid">
+      <div class="study-day">
+        <div class="study-day-name">MON</div>
+        <div class="study-block sb-study">Prep Translation</div>
+        <div class="study-block sb-class">Translation 11:00–12:30</div>
+        <div class="study-block sb-study">Essay Writing study</div>
+      </div>
+      <div class="study-day">
+        <div class="study-day-name">TUE</div>
+        <div class="study-block sb-study">Prep RPA</div>
+        <div class="study-block sb-class teal">RPA 9:30–11:00</div>
+        <div class="study-block sb-study">RPA practice</div>
+        <div class="study-block sb-class indigo">Essay 14:30–16:00</div>
+        <div class="study-block sb-review">RPA review</div>
+      </div>
+      <div class="study-day">
+        <div class="study-day-name">WED</div>
+        <div class="study-block sb-study">Essay study</div>
+        <div class="study-block sb-study">RPA deep work</div>
+        <div class="study-block sb-study">Translation exercises</div>
+      </div>
+      <div class="study-day">
+        <div class="study-day-name">THU</div>
+        <div class="study-block sb-study">Prep Translation</div>
+        <div class="study-block sb-class">Translation 11:00–12:30</div>
+        <div class="study-block sb-study">Essay study</div>
+        <div class="study-block sb-review">RPA review</div>
+      </div>
+      <div class="study-day">
+        <div class="study-day-name">FRI</div>
+        <div class="study-block sb-study">Prep RPA</div>
+        <div class="study-block sb-class teal">RPA 9:30–11:00</div>
+        <div class="study-block sb-study">RPA practice</div>
+        <div class="study-block sb-class indigo">Essay 14:30–16:00</div>
+        <div class="study-block sb-review">Translation review</div>
+      </div>
+      <div class="study-day">
+        <div class="study-day-name">SAT</div>
+        <div class="study-block sb-review">Weekly review</div>
+        <div class="study-block sb-study">Assignments</div>
+      </div>
+      <div class="study-day">
+        <div class="study-day-name">SUN</div>
+        <div class="study-block sb-study">Translation prep</div>
+        <div class="sb-rest">Rest 🌙</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+  <div class="section-label">001425 — Translation · Semester Topics</div>
+  <div class="syllabus-section">
+    <table class="syllabus-table">
+      <thead><tr><th>WK</th><th>DATE</th><th>MONDAY</th><th>THURSDAY</th></tr></thead>
+      <tbody>
+        <tr><td class="wk-num">1</td><td class="wk-date">Jun 22</td><td>Introduction + coupon purchase</td><td>Micro-translation strategies</td></tr>
+        <tr><td class="wk-num">2</td><td class="wk-date">Jun 29</td><td>Academic texts</td><td>Wai Kru Ceremony (Holiday)</td></tr>
+        <tr><td class="wk-num">3</td><td class="wk-date">Jul 6</td><td>Academic texts</td><td>Academic texts</td></tr>
+        <tr><td class="wk-num">4</td><td class="wk-date">Jul 13</td><td>Academic texts</td><td>Academic texts</td></tr>
+        <tr class="highlight"><td class="wk-num">5</td><td class="wk-date">Jul 20</td><td><strong>Quiz I</strong> <span class="wk-badge exam">EXAM</span></td><td>Mass-media texts</td></tr>
+        <tr><td class="wk-num">6</td><td class="wk-date">Jul 27</td><td>Mass-media texts</td><td>Holiday</td></tr>
+        <tr><td class="wk-num">7</td><td class="wk-date">Aug 3</td><td>Mass-media texts</td><td>Mass-media texts</td></tr>
+        <tr class="highlight"><td class="wk-num">8</td><td class="wk-date">Aug 10</td><td>Mass-media texts</td><td><strong>Quiz II</strong> <span class="wk-badge exam">EXAM</span></td></tr>
+        <tr class="highlight"><td class="wk-num">9–10</td><td class="wk-date">Aug 17</td><td colspan="2" style="text-align:center"><strong>Reading Week → Midterm Exam (Aug 30, 15:30–18:30)</strong> <span class="wk-badge exam">MIDTERM</span></td></tr>
+        <tr><td class="wk-num">11</td><td class="wk-date">Aug 31</td><td>Legal texts</td><td>Legal texts</td></tr>
+        <tr><td class="wk-num">12</td><td class="wk-date">Sep 7</td><td>Legal texts</td><td>Legal texts</td></tr>
+        <tr><td class="wk-num">13</td><td class="wk-date">Sep 14</td><td>Legal texts</td><td>Legal texts</td></tr>
+        <tr class="highlight"><td class="wk-num">14</td><td class="wk-date">Sep 21</td><td><strong>Quiz III</strong> <span class="wk-badge exam">EXAM</span></td><td>Audio-visual texts</td></tr>
+        <tr><td class="wk-num">15</td><td class="wk-date">Sep 28</td><td>Audio-visual texts</td><td>Audio-visual texts</td></tr>
+        <tr><td class="wk-num">16</td><td class="wk-date">Oct 5</td><td>Audio-visual texts</td><td>Audio-visual texts</td></tr>
+        <tr class="highlight"><td class="wk-num">17</td><td class="wk-date">Oct 12</td><td>Audio-visual texts</td><td><strong>Quiz IV</strong> <span class="wk-badge exam">EXAM</span></td></tr>
+        <tr class="highlight"><td class="wk-num">18</td><td class="wk-date">Oct 19</td><td colspan="2" style="text-align:center"><strong>Final Exam Week (Oct 22, 12:00–15:00)</strong> <span class="wk-badge exam">FINAL</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label">703314 — RPA · Semester Topics</div>
+  <div class="syllabus-section">
+    <table class="syllabus-table">
+      <thead><tr><th>WK</th><th>DATE</th><th>TUESDAY TOPIC</th><th>FRIDAY TOPIC</th></tr></thead>
+      <tbody>
+        <tr><td class="wk-num">1</td><td class="wk-date">Jun 23</td><td>Class logistics + automation in business</td><td>RPA, Workflow &amp; AI Agent spectrum</td></tr>
+        <tr><td class="wk-num">2</td><td class="wk-date">Jun 30</td><td>Process selection for RPA &amp; Agentic AI</td><td>Process design &amp; BPM Lifecycle</td></tr>
+        <tr><td class="wk-num">3</td><td class="wk-date">Jul 7</td><td>Intro to UiPath + install Academic license</td><td>Recording &amp; basic activities</td></tr>
+        <tr><td class="wk-num">4</td><td class="wk-date">Jul 14</td><td>Variables &amp; control flow (low-code)</td><td>UI automation</td></tr>
+        <tr><td class="wk-num">5</td><td class="wk-date">Jul 21</td><td>Excel &amp; data management</td><td>PDF &amp; email automation</td></tr>
+        <tr><td class="wk-num">6</td><td class="wk-date">Jul 28</td><td>Holiday — King's Birthday</td><td>Error handling, debugging + start Project 1</td></tr>
+        <tr class="highlight-teal"><td class="wk-num">7</td><td class="wk-date">Aug 4</td><td>Project 1 — lab clinic</td><td><strong>Submit &amp; present Project 1</strong> <span class="wk-badge project">PROJECT</span></td></tr>
+        <tr><td class="wk-num">8</td><td class="wk-date">Aug 11</td><td>Workflow automation with Make</td><td>Connect cloud — Google Sheets, Gmail, Forms</td></tr>
+        <tr><td class="wk-num">9</td><td class="wk-date">Aug 18</td><td>Router, filter, iterator &amp; data transform</td><td>Webhooks &amp; HTTP requests (no-code)</td></tr>
+        <tr><td class="wk-num">10</td><td class="wk-date">Aug 25</td><td>LLM in workflow — classify / extract / summarize</td><td>Prompt writing for AI Agent &amp; validation</td></tr>
+        <tr><td class="wk-num">11</td><td class="wk-date">Sep 1</td><td>Design &amp; build AI Agent</td><td>Hybrid automation (RPA + agent) + start Project 2</td></tr>
+        <tr class="highlight-teal"><td class="wk-num">12</td><td class="wk-date">Sep 8</td><td>Project 2 — clinic + governance/PDPA</td><td><strong>Submit &amp; present Project 2</strong> <span class="wk-badge project">PROJECT</span></td></tr>
+        <tr><td class="wk-num">13</td><td class="wk-date">Sep 15</td><td>Hyperautomation + Gemini Enterprise</td><td>Tool selection framework + start Capstone</td></tr>
+        <tr><td class="wk-num">14</td><td class="wk-date">Sep 22</td><td>Capstone — clinic/lab</td><td>Testing &amp; Quality Assurance</td></tr>
+        <tr class="highlight-teal"><td class="wk-num">15</td><td class="wk-date">Sep 29</td><td><strong>Capstone Presentation</strong> <span class="wk-badge project">CAPSTONE</span></td><td>Subject wrap-up + exam review</td></tr>
+        <tr class="highlight-teal"><td class="wk-num">—</td><td class="wk-date">Nov 1</td><td colspan="2" style="text-align:center"><strong>Final Exam (15:30–18:30) · 30% of grade</strong> <span class="wk-badge exam">FINAL</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label">703314 — RPA · Grading Breakdown</div>
+  <div style="background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:1.25rem;max-width:400px;">
+    <div style="display:flex;flex-direction:column;gap:.6rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
+        <span>In-class activities / quizzes</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#2a9a94;">30%</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
+        <span>Project 1 — Deterministic RPA (UiPath)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#2a9a94;">10%</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
+        <span>Project 2 — Agentic automation (Make + LLM)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#2a9a94;">15%</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
+        <span>Capstone</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#2a9a94;">15%</span>
+      </div>
+      <div style="border-top:1px solid var(--border);padding-top:.6rem;display:flex;justify-content:space-between;align-items:center;font-size:.88rem;font-weight:600;">
+        <span>Final Exam</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:var(--accent);">30%</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
 import{getFirestore,doc,getDoc,setDoc,onSnapshot}from"https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js";
@@ -521,7 +777,8 @@ window.switchTab=function(name){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
-  document.querySelectorAll('.tab-btn')[name==='spending'?0:1].classList.add('active');
+  const idx={spending:0,schedule:1,courses:2}[name]||0;
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
 };
 
 // ══════════════════════════════════════
@@ -738,12 +995,12 @@ window.jumpToToday=function(){
 function seedSchedule(){
   const endDate=new Date('2026-10-31');
   const templates=[
-    {day:1,time:'11:00',title:'Translation for Professional P. (HB7705)',color:'blue'},
-    {day:2,time:'09:00',title:'Robotic Process Automation (BAB Lab Comp)',color:'teal'},
-    {day:2,time:'14:30',title:'Essay Writing (HB7703)',color:'indigo'},
-    {day:4,time:'11:00',title:'Translation for Professional P. (HB7705)',color:'blue'},
-    {day:5,time:'09:00',title:'Robotic Process Automation (BAB Lab Comp)',color:'teal'},
-    {day:5,time:'14:30',title:'Essay Writing (HB7703)',color:'indigo'},
+    {day:1,time:'11:00',title:'Translation 001425 (HB7705)',color:'blue'},
+    {day:2,time:'09:30',title:'RPA 703314 (BAB Lab Comp ชั้น 2)',color:'teal'},
+    {day:2,time:'14:30',title:'Essay Writing 001218 (HB7703)',color:'indigo'},
+    {day:4,time:'11:00',title:'Translation 001425 (HB7705)',color:'blue'},
+    {day:5,time:'09:30',title:'RPA 703314 (BAB Lab Comp ชั้น 2)',color:'teal'},
+    {day:5,time:'14:30',title:'Essay Writing 001218 (HB7703)',color:'indigo'},
   ];
   const start=new Date('2026-06-20'),list=[];
   templates.forEach(t=>{
@@ -755,6 +1012,20 @@ function seedSchedule(){
       cur.setDate(cur.getDate()+7);
     }
   });
+  // One-time exam & deadline events
+  const oneTime=[
+    {date:'2026-07-20',time:'11:00',title:'Quiz I — Translation 001425',color:'blue'},
+    {date:'2026-08-07',time:'09:30',title:'Submit Project 1 (RPA/UiPath) — 703314',color:'teal'},
+    {date:'2026-08-13',time:'11:00',title:'Quiz II — Translation 001425',color:'blue'},
+    {date:'2026-08-30',time:'15:30',title:'Midterm Exam — Translation 001425',color:'red'},
+    {date:'2026-09-11',time:'09:30',title:'Submit Project 2 (Agentic) — 703314',color:'teal'},
+    {date:'2026-09-21',time:'11:00',title:'Quiz III — Translation 001425',color:'blue'},
+    {date:'2026-09-29',time:'09:30',title:'Capstone Presentation — 703314',color:'teal'},
+    {date:'2026-10-15',time:'11:00',title:'Quiz IV — Translation 001425',color:'blue'},
+    {date:'2026-10-22',time:'12:00',title:'Final Exam — Translation 001425',color:'red'},
+    {date:'2026-11-01',time:'15:30',title:'Final Exam — RPA 703314',color:'red'},
+  ];
+  oneTime.forEach(t=>list.push({id:Date.now()+Math.random(),...t}));
   return list;
 }
 
