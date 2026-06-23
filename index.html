@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>My Dashboard</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,wght@0,300;0,600;1,300&family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --ink:#1a1a2e;--paper:#f7f4ef;--warm-mid:#e8e2d9;
@@ -17,7 +17,7 @@
   --es:#a06b8f;--es-bg:#efe1ea;--es-tx:#5f3d54;--es-tm:#865674;
 }
 html{font-size:16px;}
-body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;min-height:100vh;padding-bottom:3rem;}
+body{background:var(--paper);color:var(--ink);font-family:'Fraunces',serif;font-optical-sizing:auto;font-weight:400;line-height:1.5;min-height:100vh;padding-bottom:3rem;}
 
 /* SYNC */
 #sync-bar{display:flex;align-items:center;gap:.5rem;padding:.4rem 2rem;font-family:'DM Mono',monospace;font-size:.7rem;background:var(--ink);color:#9a9585;}
@@ -45,7 +45,7 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .month-nav span{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:300;flex:1;text-align:center;}
 .jump-row{display:flex;align-items:center;gap:.6rem;margin-bottom:1.5rem;flex-wrap:wrap;}
 .jump-row label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:var(--muted);}
-.jump-row input{border:1.5px solid var(--border);border-radius:6px;padding:.4rem .6rem;font-family:'Inter',sans-serif;font-size:.82rem;background:#fff;color:var(--ink);outline:none;}
+.jump-row input{border:1.5px solid var(--border);border-radius:6px;padding:.4rem .6rem;font-family:'Fraunces',serif;font-size:.82rem;background:#fff;color:var(--ink);outline:none;}
 .jump-row input:focus{border-color:var(--accent);}
 
 .budget-ring-row{display:flex;gap:2rem;align-items:center;background:var(--ink);color:var(--paper);border-radius:12px;padding:1.5rem 2rem;margin-bottom:2rem;flex-wrap:wrap;}
@@ -67,7 +67,7 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 @media(max-width:600px){.add-row{grid-template-columns:1fr 1fr;}}
 .field{display:flex;flex-direction:column;gap:.3rem;}
 .field label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;color:var(--muted);}
-.field input,.field select{border:1.5px solid var(--border);border-radius:6px;padding:.55rem .75rem;font-family:'Inter',sans-serif;font-size:.88rem;background:#fff;color:var(--ink);outline:none;transition:border-color .15s;}
+.field input,.field select{border:1.5px solid var(--border);border-radius:6px;padding:.55rem .75rem;font-family:'Fraunces',serif;font-size:.88rem;background:#fff;color:var(--ink);outline:none;transition:border-color .15s;}
 .field input:focus,.field select:focus{border-color:var(--accent);}
 .btn{padding:.55rem 1.2rem;border-radius:6px;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.06em;transition:opacity .15s,transform .1s;}
 .btn:active{transform:scale(.97);}
@@ -92,7 +92,7 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .item-actions{display:flex;gap:.3rem;flex-shrink:0;}
 .edit-btn,.del-btn{background:none;border:none;cursor:pointer;font-size:.9rem;padding:.2rem .35rem;border-radius:4px;transition:background .15s;}
 .edit-btn{color:var(--muted);}
-.edit-btn:hover{color:#4a80b5;background:#dce8f5;}
+.edit-btn:hover{color:#b07a5c;background:#f0e4d9;}
 .del-btn{color:var(--muted);}
 .del-btn:hover{color:var(--accent);background:var(--accent-soft);}
 
@@ -194,15 +194,15 @@ header h1 em{font-style:italic;color:#c9aa8c;}
   .tg-freeday{position:static;height:auto;justify-content:flex-start;}
 }
 .ev-edit-btn,.ev-del-btn{background:rgba(255,255,255,.85);border:none;border-radius:3px;cursor:pointer;font-size:.7rem;padding:1px 4px;line-height:1;}
-.ev-edit-btn:hover{background:#dce8f5;}
+.ev-edit-btn:hover{background:#f0e4d9;}
 .ev-del-btn:hover{background:var(--accent-soft);}
 .ev-rose   {background:#f5dde0;border-color:#b54a55;}.ev-rose   .ev-time{color:#b54a55;}
 
 /* ALL EVENTS LIST */
 .list-controls{display:flex;gap:.6rem;margin-bottom:1.5rem;flex-wrap:wrap;}
-.list-controls input{flex:1;min-width:160px;border:1.5px solid var(--border);border-radius:6px;padding:.55rem .75rem;font-family:'Inter',sans-serif;font-size:.88rem;background:#fff;color:var(--ink);outline:none;}
+.list-controls input{flex:1;min-width:160px;border:1.5px solid var(--border);border-radius:6px;padding:.55rem .75rem;font-family:'Fraunces',serif;font-size:.88rem;background:#fff;color:var(--ink);outline:none;}
 .list-controls input:focus{border-color:var(--green);}
-.list-controls select{border:1.5px solid var(--border);border-radius:6px;padding:.55rem .75rem;font-family:'Inter',sans-serif;font-size:.85rem;background:#fff;color:var(--ink);outline:none;cursor:pointer;}
+.list-controls select{border:1.5px solid var(--border);border-radius:6px;padding:.55rem .75rem;font-family:'Fraunces',serif;font-size:.85rem;background:#fff;color:var(--ink);outline:none;cursor:pointer;}
 .ev-list-day{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.05em;color:var(--muted);margin:1.25rem 0 .5rem;padding-bottom:.3rem;border-bottom:1.5px solid var(--border);}
 .ev-list-day.is-today{color:var(--green);font-weight:500;}
 .ev-list-item{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;background:#fff;border-radius:8px;border:1.5px solid var(--border);border-left-width:4px;margin-bottom:.5rem;}
@@ -235,9 +235,9 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 /* COURSES TAB */
 .course-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:2rem;}
 .course-card{background:#fff;border-radius:12px;border:1.5px solid var(--border);padding:1.25rem 1.4rem;border-top-width:4px;}
-.course-card.c-blue{border-top-color:#4a80b5;}
-.course-card.c-teal{border-top-color:#2a9a94;}
-.course-card.c-indigo{border-top-color:#4a55b5;}
+.course-card.c-blue{border-top-color:#b07a5c;}
+.course-card.c-teal{border-top-color:#7d8a52;}
+.course-card.c-indigo{border-top-color:#a06b8f;}
 .course-card-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;}
 .course-code{font-family:'DM Mono',monospace;font-size:.75rem;font-weight:500;color:var(--muted);}
 .course-badge{font-family:'DM Mono',monospace;font-size:.62rem;padding:.15rem .55rem;border-radius:20px;letter-spacing:.04em;}
@@ -259,9 +259,9 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .kd-sub{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);margin-top:.1rem;}
 .kd-date{font-family:'Fraunces',serif;font-size:.95rem;font-weight:600;color:var(--ink);white-space:nowrap;}
 .kd-tag{font-family:'DM Mono',monospace;font-size:.62rem;padding:.15rem .5rem;border-radius:10px;white-space:nowrap;}
-.kd-tag.blue{background:#dce8f5;color:#4a80b5;}
-.kd-tag.teal{background:#d9f0ef;color:#2a9a94;}
-.kd-tag.indigo{background:#dde0f5;color:#4a55b5;}
+.kd-tag.blue{background:#f0e4d9;color:#b07a5c;}
+.kd-tag.teal{background:#e9ecdc;color:#7d8a52;}
+.kd-tag.indigo{background:#efe1ea;color:#a06b8f;}
 .kd-item{cursor:pointer;transition:border-color .15s,box-shadow .15s;}
 .kd-item:hover{border-color:var(--green);box-shadow:0 2px 8px rgba(58,125,90,.08);}
 .kd-jump{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--green);opacity:0;transition:opacity .15s;white-space:nowrap;padding-left:.5rem;}
@@ -273,12 +273,12 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .syllabus-table td{padding:.55rem .75rem;border-bottom:1px solid var(--warm-mid);vertical-align:top;}
 .syllabus-table tr:last-child td{border-bottom:none;}
 .syllabus-table tr.highlight td{background:var(--accent-soft);}
-.syllabus-table tr.highlight-teal td{background:#d9f0ef;}
+.syllabus-table tr.highlight-teal td{background:#e9ecdc;}
 .wk-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);white-space:nowrap;}
 .wk-date{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);white-space:nowrap;}
 .wk-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:.62rem;padding:.1rem .45rem;border-radius:10px;margin-left:.4rem;}
 .wk-badge.exam{background:var(--accent-soft);color:var(--accent);}
-.wk-badge.project{background:#d9f0ef;color:#2a9a94;}
+.wk-badge.project{background:#e9ecdc;color:#7d8a52;}
 .wk-badge.holiday{background:var(--warm-mid);color:var(--muted);}
 .study-plan-box{background:var(--ink);color:var(--paper);border-radius:12px;padding:1.5rem;margin-bottom:2rem;}
 .study-plan-box h3{font-family:'Fraunces',serif;font-weight:300;font-size:1.2rem;margin-bottom:1rem;}
@@ -287,9 +287,9 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .study-day{display:flex;flex-direction:column;gap:.3rem;}
 .study-day-name{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.06em;color:#9a9585;text-align:center;padding-bottom:.3rem;border-bottom:1px solid #3a3a55;}
 .study-block{font-size:.65rem;padding:.3rem .4rem;border-radius:4px;line-height:1.3;text-align:center;}
-.sb-class{background:#dce8f5;color:#4a80b5;}
-.sb-class.teal{background:#d9f0ef;color:#2a9a94;}
-.sb-class.indigo{background:#dde0f5;color:#4a55b5;}
+.sb-class{background:#f0e4d9;color:#b07a5c;}
+.sb-class.teal{background:#e9ecdc;color:#7d8a52;}
+.sb-class.indigo{background:#efe1ea;color:#a06b8f;}
 .sb-study{background:#3a3a55;color:#c9aa8c;border:1px dashed #5a5a75;}
 .sb-review{background:#3a3a55;color:#8a9acf;border:1px dashed #5a5a75;}
 .sb-rest{color:#5a5a75;text-align:center;font-size:.65rem;padding:.3rem 0;}
@@ -302,7 +302,7 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .prog-bar-row{display:flex;align-items:center;gap:.5rem;}
 .prog-track{width:90px;height:5px;background:var(--warm-mid);border-radius:10px;overflow:hidden;}
 .prog-fill{height:100%;border-radius:10px;transition:width .4s ease;}
-.prog-fill.blue{background:#4a80b5;}.prog-fill.teal{background:#2a9a94;}.prog-fill.indigo{background:#4a55b5;}
+.prog-fill.blue{background:#b07a5c;}.prog-fill.teal{background:#7d8a52;}.prog-fill.indigo{background:#a06b8f;}
 .prog-pct{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);min-width:30px;}
 .prog-chevron{font-size:.75rem;color:var(--muted);transition:transform .2s;margin-left:.25rem;}
 .prog-chevron.open{transform:rotate(180deg);}
@@ -663,21 +663,21 @@ header h1 em{font-style:italic;color:#c9aa8c;}
   <hr class="divider"/>
   <div class="section-label">Key Dates &amp; Deadlines</div>
   <div class="key-dates-list">
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-07-20')"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz I</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Jul 20</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-07-24')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Outline Essay I (5%)</div><div class="kd-sub">001218 Essay Writing · Written in class ~150–200 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Jul 24</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-07')"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Project 1 — RPA with UiPath</div><div class="kd-sub">703314 RPA · Submit &amp; present</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Aug 7</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-13')"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz II</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Aug 13</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-18')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Final Draft Essay I (15%)</div><div class="kd-sub">001218 Essay Writing · Causal Analysis, 450–500 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Aug 18</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-28')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Midterm Exam · Essay Writing</div><div class="kd-sub">001218 · Causal analysis essay, 450–500 words (paper dict. allowed)</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Aug 28 · 08:00–11:00</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-30')"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Midterm Exam · Translation</div><div class="kd-sub">001425 · Reading week Aug 17–23 before exam</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Aug 30 · 15:30–18:30</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-09-11')"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Project 2 — Agentic Automation</div><div class="kd-sub">703314 RPA · Submit &amp; present (Make + LLM)</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Sep 11</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-09-18')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Outline Essay II (5%)</div><div class="kd-sub">001218 Essay Writing · Written in class ~150–200 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Sep 18</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-09-29')"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Capstone Presentation</div><div class="kd-sub">703314 RPA · Full automation pipeline</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Sep 29</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-13')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Final Draft Essay II (15%)</div><div class="kd-sub">001218 Essay Writing · Opinion essay, 450–500 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Oct 13</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-15')"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Quiz IV</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Oct 15</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-21')"><div class="kd-dot" style="background:#4a55b5"></div><div class="kd-info"><div class="kd-title">Final Exam · Essay Writing</div><div class="kd-sub">001218 · Opinion essay, 450–500 words (paper dict. allowed)</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Oct 21 · 08:00–11:00</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-22')"><div class="kd-dot" style="background:#4a80b5"></div><div class="kd-info"><div class="kd-title">Final Exam · Translation</div><div class="kd-sub">001425 · Audio-visual texts focus</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Oct 22 · 12:00–15:00</span><span class="kd-jump">→ Schedule</span></div>
-    <div class="kd-item" onclick="jumpToScheduleDate('2026-11-01')"><div class="kd-dot" style="background:#2a9a94"></div><div class="kd-info"><div class="kd-title">Final Exam · RPA</div><div class="kd-sub">703314 · 30% of grade</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Nov 1 · 15:30–18:30</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-07-20')"><div class="kd-dot" style="background:#b07a5c"></div><div class="kd-info"><div class="kd-title">Quiz I</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Jul 20</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-07-24')"><div class="kd-dot" style="background:#a06b8f"></div><div class="kd-info"><div class="kd-title">Outline Essay I (5%)</div><div class="kd-sub">001218 Essay Writing · Written in class ~150–200 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Jul 24</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-07')"><div class="kd-dot" style="background:#7d8a52"></div><div class="kd-info"><div class="kd-title">Project 1 — RPA with UiPath</div><div class="kd-sub">703314 RPA · Submit &amp; present</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Aug 7</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-13')"><div class="kd-dot" style="background:#b07a5c"></div><div class="kd-info"><div class="kd-title">Quiz II</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Aug 13</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-18')"><div class="kd-dot" style="background:#a06b8f"></div><div class="kd-info"><div class="kd-title">Final Draft Essay I (15%)</div><div class="kd-sub">001218 Essay Writing · Causal Analysis, 450–500 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Aug 18</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-28')"><div class="kd-dot" style="background:#a06b8f"></div><div class="kd-info"><div class="kd-title">Midterm Exam · Essay Writing</div><div class="kd-sub">001218 · Causal analysis essay, 450–500 words (paper dict. allowed)</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Aug 28 · 08:00–11:00</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-08-30')"><div class="kd-dot" style="background:#b07a5c"></div><div class="kd-info"><div class="kd-title">Midterm Exam · Translation</div><div class="kd-sub">001425 · Reading week Aug 17–23 before exam</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Aug 30 · 15:30–18:30</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-09-11')"><div class="kd-dot" style="background:#7d8a52"></div><div class="kd-info"><div class="kd-title">Project 2 — Agentic Automation</div><div class="kd-sub">703314 RPA · Submit &amp; present (Make + LLM)</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Sep 11</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-09-18')"><div class="kd-dot" style="background:#a06b8f"></div><div class="kd-info"><div class="kd-title">Outline Essay II (5%)</div><div class="kd-sub">001218 Essay Writing · Written in class ~150–200 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Sep 18</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-09-29')"><div class="kd-dot" style="background:#7d8a52"></div><div class="kd-info"><div class="kd-title">Capstone Presentation</div><div class="kd-sub">703314 RPA · Full automation pipeline</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Sep 29</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-13')"><div class="kd-dot" style="background:#a06b8f"></div><div class="kd-info"><div class="kd-title">Final Draft Essay II (15%)</div><div class="kd-sub">001218 Essay Writing · Opinion essay, 450–500 words</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Oct 13</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-15')"><div class="kd-dot" style="background:#b07a5c"></div><div class="kd-info"><div class="kd-title">Quiz IV</div><div class="kd-sub">001425 Translation · In-class</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Oct 15</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-21')"><div class="kd-dot" style="background:#a06b8f"></div><div class="kd-info"><div class="kd-title">Final Exam · Essay Writing</div><div class="kd-sub">001218 · Opinion essay, 450–500 words (paper dict. allowed)</div></div><span class="kd-tag indigo">ESSAY</span><span class="kd-date">Oct 21 · 08:00–11:00</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-10-22')"><div class="kd-dot" style="background:#b07a5c"></div><div class="kd-info"><div class="kd-title">Final Exam · Translation</div><div class="kd-sub">001425 · Audio-visual texts focus</div></div><span class="kd-tag blue">TRANS</span><span class="kd-date">Oct 22 · 12:00–15:00</span><span class="kd-jump">→ Schedule</span></div>
+    <div class="kd-item" onclick="jumpToScheduleDate('2026-11-01')"><div class="kd-dot" style="background:#7d8a52"></div><div class="kd-info"><div class="kd-title">Final Exam · RPA</div><div class="kd-sub">703314 · 30% of grade</div></div><span class="kd-tag teal">RPA</span><span class="kd-date">Nov 1 · 15:30–18:30</span><span class="kd-jump">→ Schedule</span></div>
   </div>
 
   <hr class="divider"/>
@@ -814,13 +814,13 @@ header h1 em{font-style:italic;color:#c9aa8c;}
   <div style="background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:1.25rem;max-width:400px;margin-bottom:2rem;">
     <div style="display:flex;flex-direction:column;gap:.6rem;">
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
-        <span>Task 1 — Causal Analysis Essay (Outline 5% + Draft 15%)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#4a55b5;">20%</span>
+        <span>Task 1 — Causal Analysis Essay (Outline 5% + Draft 15%)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#a06b8f;">20%</span>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
-        <span>Task 2 — Opinion Essay (Outline 5% + Draft 15%)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#4a55b5;">20%</span>
+        <span>Task 2 — Opinion Essay (Outline 5% + Draft 15%)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#a06b8f;">20%</span>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
-        <span>Midterm Exam (Causal analysis, 450–500 words)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#4a55b5;">30%</span>
+        <span>Midterm Exam (Causal analysis, 450–500 words)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#a06b8f;">30%</span>
       </div>
       <div style="border-top:1px solid var(--border);padding-top:.6rem;display:flex;justify-content:space-between;align-items:center;font-size:.88rem;font-weight:600;">
         <span>Final Exam (Opinion essay, 450–500 words)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:var(--accent);">30%</span>
@@ -832,16 +832,16 @@ header h1 em{font-style:italic;color:#c9aa8c;}
   <div style="background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:1.25rem;max-width:400px;">
     <div style="display:flex;flex-direction:column;gap:.6rem;">
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
-        <span>In-class activities / quizzes</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#2a9a94;">30%</span>
+        <span>In-class activities / quizzes</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#7d8a52;">30%</span>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
-        <span>Project 1 — Deterministic RPA (UiPath)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#2a9a94;">10%</span>
+        <span>Project 1 — Deterministic RPA (UiPath)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#7d8a52;">10%</span>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
-        <span>Project 2 — Agentic automation (Make + LLM)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#2a9a94;">15%</span>
+        <span>Project 2 — Agentic automation (Make + LLM)</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#7d8a52;">15%</span>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;font-size:.88rem;">
-        <span>Capstone</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#2a9a94;">15%</span>
+        <span>Capstone</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:#7d8a52;">15%</span>
       </div>
       <div style="border-top:1px solid var(--border);padding-top:.6rem;display:flex;justify-content:space-between;align-items:center;font-size:.88rem;font-weight:600;">
         <span>Final Exam</span><span style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:600;color:var(--accent);">30%</span>
@@ -876,7 +876,7 @@ function setSyncStatus(state,msg){
 // ── CONSTANTS ──
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTHS_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const CAT_COLORS={Food:'#c9553a',Transport:'#4a80b5',Housing:'#3a7d5a',Health:'#8a6daa',Shopping:'#c5960a',Entertainment:'#c9aa8c',Other:'#8a8580'};
+const CAT_COLORS={Food:'#c9553a',Transport:'#b07a5c',Housing:'#3a7d5a',Health:'#8a6daa',Shopping:'#c5960a',Entertainment:'#c9aa8c',Other:'#8a8580'};
 // ── SCHEDULE TIME-GRID CONFIG ──
 const TG_PX=64,TG_START=9,TG_END=16.5,TG_H=(TG_END-TG_START)*TG_PX;
 const CATS={
@@ -1007,9 +1007,9 @@ function seedSemester(){
 }
 
 const EV_COLORS={
-  green:{hex:'#3a7d5a',label:'Green'},red:{hex:'#c9553a',label:'Red'},blue:{hex:'#4a80b5',label:'Blue'},
+  green:{hex:'#3a7d5a',label:'Green'},red:{hex:'#c9553a',label:'Red'},blue:{hex:'#b07a5c',label:'Blue'},
   yellow:{hex:'#c5960a',label:'Yellow'},purple:{hex:'#8a4fbb',label:'Purple'},pink:{hex:'#c9508a',label:'Pink'},
-  orange:{hex:'#d4702a',label:'Orange'},teal:{hex:'#2a9a94',label:'Teal'},indigo:{hex:'#4a55b5',label:'Indigo'},rose:{hex:'#b54a55',label:'Rose'}
+  orange:{hex:'#d4702a',label:'Orange'},teal:{hex:'#7d8a52',label:'Teal'},indigo:{hex:'#a06b8f',label:'Indigo'},rose:{hex:'#b54a55',label:'Rose'}
 };
 
 // ── COURSE TASKS ──
@@ -1126,7 +1126,7 @@ function renderUpcomingDeadlines(){
   if(!cont)return;
   const todayStr=isoDate(new Date());
   const limitStr=isoDate(new Date(Date.now()+60*24*3600*1000));
-  const colorHex={blue:'#4a80b5',teal:'#2a9a94',indigo:'#4a55b5'};
+  const colorHex={blue:'#b07a5c',teal:'#7d8a52',indigo:'#a06b8f'};
   const colorTag={blue:'blue',teal:'teal',indigo:'indigo'};
   const upcoming=[];
   COURSE_TASKS.forEach(course=>{
