@@ -128,10 +128,20 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .week-nav span{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:300;flex:1;text-align:center;}
 
 /* TIME-GRID */
-.tg-legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:1rem;font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);}
+/* schedule card — matches schedule.html aesthetic */
+.sched-card{background:#fbf8f2;border:1.5px solid var(--border);border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.06);overflow:hidden;margin-bottom:1rem;}
+.sched-card-head{display:flex;align-items:center;justify-content:space-between;padding:1.3rem 1.6rem 1.05rem;gap:1rem;flex-wrap:wrap;}
+.sched-eyebrow{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#a39a8a;}
+.sched-range{font-family:'Fraunces',serif;font-weight:300;font-size:1.5rem;margin-top:.15rem;letter-spacing:-.01em;}
+.sched-navbtns{display:flex;gap:.5rem;align-items:center;}
+.nb{font-family:'DM Mono',monospace;font-size:.72rem;border:1.5px solid var(--border);background:var(--paper);color:var(--muted);padding:.5rem 1rem;border-radius:999px;cursor:pointer;transition:all .15s;}
+.nb:hover{border-color:var(--accent);color:var(--accent);}
+.nb.solid{border-color:var(--ink);background:var(--ink);color:var(--paper);}
+.nb.solid:hover{opacity:.85;color:var(--paper);}
+.sched-foot{font-family:'DM Mono',monospace;font-size:.62rem;color:#a39a8a;margin:0 0 1.5rem;}
+.tg-legend{display:flex;flex-wrap:wrap;gap:16px;padding:0 1.6rem 1.05rem;font-family:'DM Mono',monospace;font-size:.62rem;color:var(--muted);}
 .tg-legend span{display:flex;align-items:center;gap:6px;}
 .tg-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;flex-shrink:0;}
-.tg-wrap{background:#fbf8f2;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.5rem;}
 .tg-grid{display:grid;grid-template-columns:52px repeat(7,1fr);border-top:1px solid var(--border);}
 .tg-dh{text-align:center;padding:10px 0 8px;border-right:1px solid var(--border);}
 .tg-dh:last-child{border-right:none;}
@@ -146,23 +156,30 @@ header h1 em{font-style:italic;color:#c9aa8c;}
 .tg-col:last-child{border-right:none;}
 .tg-col.tg-wknd{background:#f5f2ec;}
 .tg-col.tg-today{background:#faf4ea;}
-.tg-ev{position:absolute;left:3px;right:3px;border-radius:5px;padding:5px 6px;overflow:hidden;cursor:default;}
+.tg-ev{position:absolute;left:3px;right:3px;border-radius:5px;padding:5px 6px;overflow:hidden;cursor:pointer;transition:filter .12s;}
+.tg-ev:hover{filter:brightness(.97);}
 .tg-et{font-family:'DM Mono',monospace;font-size:.58rem;}
 .tg-en{font-size:.68rem;font-weight:600;line-height:1.25;margin-top:2px;}
 .tg-er{font-size:.58rem;margin-top:1px;opacity:.85;}
 .tg-ev.tg-tr{background:var(--tr-bg);border-left:3px solid var(--tr);}.tg-ev.tg-tr .tg-et,.tg-ev.tg-tr .tg-er{color:var(--tr-tm);}.tg-ev.tg-tr .tg-en{color:var(--tr-tx);}
 .tg-ev.tg-rpa{background:var(--rpa-bg);border-left:3px solid var(--rpa);}.tg-ev.tg-rpa .tg-et,.tg-ev.tg-rpa .tg-er{color:var(--rpa-tm);}.tg-ev.tg-rpa .tg-en{color:var(--rpa-tx);}
 .tg-ev.tg-es{background:var(--es-bg);border-left:3px solid var(--es);}.tg-ev.tg-es .tg-et,.tg-ev.tg-es .tg-er{color:var(--es-tm);}.tg-ev.tg-es .tg-en{color:var(--es-tx);}
-.tg-ev.tg-user{border-left:3px solid var(--muted);}
+.tg-ev.tg-exam{background:var(--accent-soft);border-left:3px solid var(--accent);}.tg-ev.tg-exam .tg-et,.tg-ev.tg-exam .tg-er{color:#a23f28;}.tg-ev.tg-exam .tg-en{color:#7a2f1d;}
+.tg-ev.tg-custom{background:var(--green-soft);border-left:3px solid var(--green);}.tg-ev.tg-custom .tg-et,.tg-ev.tg-custom .tg-er{color:#2e6147;}.tg-ev.tg-custom .tg-en{color:#24503a;}
+.tg-ev.tg-holiday{background:#eeebe5;border-left:3px solid #b8b2a6;}.tg-ev.tg-holiday .tg-en{color:#6f6a5f;}
 .tg-ev .tg-actions{display:none;position:absolute;top:3px;right:3px;gap:2px;}
 .tg-ev:hover .tg-actions{display:flex;}
 .tg-freeday{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:.6rem;color:#cbb9a0;text-align:center;line-height:1.6;}
 .tg-top-chips{position:absolute;top:4px;left:3px;right:3px;display:flex;flex-direction:column;gap:3px;}
-.tg-chip{border-left:3px solid var(--muted);border-radius:4px;padding:3px 5px;font-size:.6rem;line-height:1.3;position:relative;}
+.tg-chip{border-left:3px solid var(--muted);border-radius:4px;padding:4px 6px;font-size:.6rem;line-height:1.3;position:relative;cursor:pointer;padding-right:18px;}
+.tg-chip .tg-ct{font-family:'DM Mono',monospace;font-size:.54rem;opacity:.85;}
 .tg-chip.tg-tr{background:var(--tr-bg);border-left-color:var(--tr);color:var(--tr-tx);}
 .tg-chip.tg-rpa{background:var(--rpa-bg);border-left-color:var(--rpa);color:var(--rpa-tx);}
 .tg-chip.tg-es{background:var(--es-bg);border-left-color:var(--es);color:var(--es-tx);}
-.tg-chip .tg-actions{display:none;position:absolute;top:2px;right:2px;}
+.tg-chip.tg-exam{background:var(--accent-soft);border-left-color:var(--accent);color:#7a2f1d;}
+.tg-chip.tg-custom{background:var(--green-soft);border-left-color:var(--green);color:#24503a;}
+.tg-chip.tg-holiday{background:#eeebe5;border-left-color:#b8b2a6;color:#6f6a5f;}
+.tg-chip .tg-actions{display:none;position:absolute;top:2px;right:2px;gap:2px;}
 .tg-chip:hover .tg-actions{display:flex;}
 .tg-dl-badge{font-size:.55rem;margin-top:5px;padding:2px 5px;background:rgba(255,255,255,.45);border-radius:3px;line-height:1.4;word-break:break-word;}
 .tg-dl-badge.done{opacity:.5;text-decoration:line-through;}
@@ -176,28 +193,9 @@ header h1 em{font-style:italic;color:#c9aa8c;}
   .tg-top-chips{position:static;margin-bottom:4px;}
   .tg-freeday{position:static;height:auto;justify-content:flex-start;}
 }
-.day-col{display:flex;flex-direction:column;gap:.4rem;}
-.day-header{text-align:center;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.08em;color:var(--muted);padding-bottom:.4rem;border-bottom:1px solid var(--border);}
-.day-header span{display:block;font-size:1.1rem;font-family:'Fraunces',serif;font-weight:300;color:var(--ink);margin-top:.2rem;}
-.day-header.today .day-num-wrap{background:var(--accent);color:#fff;border-radius:50%;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;margin-top:.2rem;}
-.day-header.today span{color:#fff;}
-
-.event-block{border-left:3px solid;border-radius:4px;padding:.3rem .4rem;font-size:.7rem;line-height:1.3;word-break:break-word;position:relative;}
-.event-block .ev-time{font-family:'DM Mono',monospace;font-size:.62rem;}
-.event-block .ev-actions{display:none;position:absolute;top:2px;right:2px;gap:2px;}
-.event-block:hover .ev-actions{display:flex;}
 .ev-edit-btn,.ev-del-btn{background:rgba(255,255,255,.85);border:none;border-radius:3px;cursor:pointer;font-size:.7rem;padding:1px 4px;line-height:1;}
 .ev-edit-btn:hover{background:#dce8f5;}
 .ev-del-btn:hover{background:var(--accent-soft);}
-.ev-green  {background:#d9ede5;border-color:#3a7d5a;}.ev-green  .ev-time{color:#3a7d5a;}
-.ev-red    {background:#f0e0db;border-color:#c9553a;}.ev-red    .ev-time{color:#c9553a;}
-.ev-blue   {background:#dce8f5;border-color:#4a80b5;}.ev-blue   .ev-time{color:#4a80b5;}
-.ev-yellow {background:#fdf3d9;border-color:#c5960a;}.ev-yellow .ev-time{color:#c5960a;}
-.ev-purple {background:#ede0f5;border-color:#8a4fbb;}.ev-purple .ev-time{color:#8a4fbb;}
-.ev-pink   {background:#fde0ee;border-color:#c9508a;}.ev-pink   .ev-time{color:#c9508a;}
-.ev-orange {background:#fdebd9;border-color:#d4702a;}.ev-orange .ev-time{color:#d4702a;}
-.ev-teal   {background:#d9f0ef;border-color:#2a9a94;}.ev-teal   .ev-time{color:#2a9a94;}
-.ev-indigo {background:#dde0f5;border-color:#4a55b5;}.ev-indigo .ev-time{color:#4a55b5;}
 .ev-rose   {background:#f5dde0;border-color:#b54a55;}.ev-rose   .ev-time{color:#b54a55;}
 
 /* ALL EVENTS LIST */
@@ -378,12 +376,19 @@ header h1 em{font-style:italic;color:#c9aa8c;}
     <div class="modal-grid">
       <div class="field" style="grid-column:1/-1"><label>TITLE</label><input type="text" id="m-ev-title"/></div>
       <div class="field"><label>DATE</label><input type="date" id="m-ev-date"/></div>
-      <div class="field"><label>TIME (optional)</label><input type="time" id="m-ev-time"/></div>
-      <div class="field" style="grid-column:1/-1">
-        <label>COLOUR</label>
-        <div class="color-picker" id="m-color-picker"></div>
-        <input type="hidden" id="m-ev-color" value="green"/>
+      <div class="field"><label>CATEGORY</label>
+        <select id="m-ev-cat">
+          <option value="custom">Personal</option>
+          <option value="tr">Translation · 001425</option>
+          <option value="rpa">RPA · 703314</option>
+          <option value="es">Essay Writing · 001218</option>
+          <option value="exam">Exam / Deadline</option>
+          <option value="holiday">Holiday / Break</option>
+        </select>
       </div>
+      <div class="field"><label>START (optional)</label><input type="time" id="m-ev-start"/></div>
+      <div class="field"><label>END (optional)</label><input type="time" id="m-ev-end"/></div>
+      <div class="field" style="grid-column:1/-1"><label>ROOM / LOCATION (optional)</label><input type="text" id="m-ev-room"/></div>
     </div>
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeEvModal()">Cancel</button>
@@ -503,33 +508,52 @@ header h1 em{font-style:italic;color:#c9aa8c;}
     <button class="sub-tab-btn" onclick="switchSchedSubTab('overview')">All Months</button>
   </div>
   <div id="sched-sub-week">
-    <div class="week-nav">
-      <button class="btn btn-ghost" onclick="changeWeek(-1)">← Prev</button>
-      <span id="week-label"></span>
-      <button class="btn btn-ghost" onclick="changeWeek(1)">Next →</button>
+    <div class="sched-card">
+      <div class="sched-card-head">
+        <div>
+          <div class="sched-eyebrow">This Week</div>
+          <div class="sched-range" id="week-label">—</div>
+        </div>
+        <div class="sched-navbtns">
+          <button class="nb" onclick="changeWeek(-1)">← Prev</button>
+          <button class="nb solid" onclick="goToThisWeek()">Today</button>
+          <button class="nb" onclick="changeWeek(1)">Next →</button>
+        </div>
+      </div>
+      <div class="tg-legend">
+        <span><i style="background:var(--tr)"></i>Translation · 001425</span>
+        <span><i style="background:var(--rpa)"></i>RPA · 703314</span>
+        <span><i style="background:var(--es)"></i>Essay Writing · 001218</span>
+        <span><i style="background:var(--accent)"></i>Exam / Deadline</span>
+        <span><i style="background:var(--green)"></i>Personal</span>
+        <span><i style="background:#b8b2a6"></i>Holiday</span>
+      </div>
+      <div class="tg-grid" id="week-grid"></div>
     </div>
-    <div class="tg-legend">
-      <span><i style="background:var(--tr)"></i>Translation · 001425</span>
-      <span><i style="background:var(--rpa)"></i>RPA · 703314</span>
-      <span><i style="background:var(--es)"></i>Essay Writing · 001218</span>
-      <span><i style="background:var(--muted);opacity:.6"></i>Custom Events</span>
-    </div>
-    <div class="tg-wrap"><div class="tg-grid" id="week-grid"></div></div>
+    <p class="sched-foot">Recurring weekly classes &amp; course deadlines shown automatically. Add personal events below.</p>
     <hr class="divider"/>
     <div class="section-label">Upcoming Deadlines from Courses</div>
     <div id="upcoming-deadlines" style="margin-bottom:1.5rem"></div>
     <hr class="divider"/>
     <div class="section-label">Add Event</div>
     <div class="add-event-form">
-      <div class="field"><label>EVENT TITLE</label><input type="text" id="ev-title" placeholder="Meeting, class, gym…"/></div>
+      <div class="field" style="grid-column:1/-1"><label>EVENT TITLE</label><input type="text" id="ev-title" placeholder="Class, quiz, study session…"/></div>
       <div class="field"><label>DATE</label><input type="date" id="ev-date"/></div>
-      <div class="field"><label>TIME (optional)</label><input type="time" id="ev-time"/></div>
-      <div class="field">
-        <label>COLOUR</label>
-        <div class="color-picker" id="color-picker"></div>
-        <input type="hidden" id="ev-color" value="green"/>
+      <div class="field"><label>CATEGORY</label>
+        <select id="ev-cat">
+          <option value="custom">Personal</option>
+          <option value="tr">Translation · 001425</option>
+          <option value="rpa">RPA · 703314</option>
+          <option value="es">Essay Writing · 001218</option>
+          <option value="exam">Exam / Deadline</option>
+          <option value="holiday">Holiday / Break</option>
+        </select>
       </div>
-      <button class="btn btn-primary" onclick="addEvent()">+ Add</button>
+      <div class="field"><label>START (optional)</label><input type="time" id="ev-start"/></div>
+      <div class="field"><label>END (optional)</label><input type="time" id="ev-end"/></div>
+      <div class="field" style="grid-column:1/-1"><label>ROOM / LOCATION (optional)</label><input type="text" id="ev-room" placeholder="e.g. HB7705"/></div>
+      <button class="btn btn-primary" onclick="addEvent()">+ Add Event</button>
+      <button class="btn btn-ghost" onclick="loadSemester()">↺ Load semester</button>
       <button class="btn btn-ghost" onclick="clearEvents()">Clear All</button>
     </div>
   </div>
@@ -853,24 +877,133 @@ function setSyncStatus(state,msg){
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const MONTHS_SHORT=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const CAT_COLORS={Food:'#c9553a',Transport:'#4a80b5',Housing:'#3a7d5a',Health:'#8a6daa',Shopping:'#c5960a',Entertainment:'#c9aa8c',Other:'#8a8580'};
-const WEEKLY_CLASSES=[
-  {cls:'tr', name:'Translation',   code:'001425',room:'HB7705',        day:1,start:11,  end:12.5},
-  {cls:'tr', name:'Translation',   code:'001425',room:'HB7705',        day:4,start:11,  end:12.5},
-  {cls:'rpa',name:'RPA',           code:'703314',room:'BAB Lab Computer ชั้น 2',day:2,start:9.5, end:11},
-  {cls:'rpa',name:'RPA',           code:'703314',room:'BAB Lab Computer ชั้น 2',day:5,start:9.5, end:11},
-  {cls:'es', name:'Essay Writing', code:'001218',room:'HB7703',        day:2,start:14.5,end:16},
-  {cls:'es', name:'Essay Writing', code:'001218',room:'HB7703',        day:5,start:14.5,end:16},
-];
+// ── SCHEDULE TIME-GRID CONFIG ──
 const TG_PX=64,TG_START=9,TG_END=16.5,TG_H=(TG_END-TG_START)*TG_PX;
-const SEMESTER_END='2026-11-01';
-const CLS_MAP={trans:'tr',rpa:'rpa',essay:'es'};
+const CATS={
+  tr:     {label:'Translation · 001425',  c:'#b07a5c'},
+  rpa:    {label:'RPA · 703314',          c:'#7d8a52'},
+  es:     {label:'Essay Writing · 001218',c:'#a06b8f'},
+  exam:   {label:'Exam / Deadline',       c:'#c9553a'},
+  custom: {label:'Personal',              c:'#3a7d5a'},
+  holiday:{label:'Holiday / Break',       c:'#9a9585'},
+};
 function tgFmt(h){const hh=Math.floor(h),mm=Math.round((h-hh)*60);return hh+':'+String(mm).padStart(2,'0');}
-function tgTimeH(t){if(!t)return null;const[h,m]=t.split(':').map(Number);return h+m/60;}
-function isCourseTaskEvent(e){
-  const colorMap={blue:'trans',teal:'rpa',indigo:'essay'};
-  const cid=colorMap[e.color];if(!cid)return false;
-  const course=COURSE_TASKS.find(c=>c.id===cid);
-  return course?course.tasks.some(t=>t.date===e.date):false;
+function decToInput(h){if(h==null||h==='')return'';const hh=Math.floor(h),mm=Math.round((h-hh)*60);return String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0');}
+function inputToDec(t){if(!t)return null;const[h,m]=t.split(':').map(Number);return h+m/60;}
+
+// ── SEMESTER SEED — built from the three official PDF class schedules ──
+function seedSemester(){
+  const T={tr:{s:11,e:12.5,room:'HB7705'},rpa:{s:9.5,e:11,room:'BAB Lab Computer ชั้น 2'},es:{s:14.5,e:16,room:'HB7703'}};
+  const c=(date,cat,title)=>({date,start:T[cat].s,end:T[cat].e,room:T[cat].room,cat,title});
+  const ex=(date,start,end,title)=>({date,start,end,title,cat:'exam',room:''});
+  const dl=(date,title)=>({date,start:null,end:null,title,cat:'exam',room:''});
+  const hol=(date,title)=>({date,start:null,end:null,title,cat:'holiday',room:''});
+  const rows=[
+    // ===== Translation 001425 — Mon & Thu 11:00–12:30 · HB7705 =====
+    c('2026-06-22','tr','Introduction + coupon purchase'),
+    c('2026-06-25','tr','Micro-translation strategies'),
+    c('2026-06-29','tr','Academic texts'),
+    c('2026-07-02','tr','Academic texts (Wai Kru Ceremony)'),
+    c('2026-07-06','tr','Academic texts'),
+    c('2026-07-09','tr','Academic texts'),
+    c('2026-07-13','tr','Academic texts'),
+    c('2026-07-16','tr','Academic texts'),
+    c('2026-07-20','tr','Quiz I'),
+    c('2026-07-23','tr','Mass-media texts'),
+    c('2026-07-27','tr','Mass-media texts'),
+    c('2026-08-03','tr','Mass-media texts'),
+    c('2026-08-06','tr','Mass-media texts'),
+    c('2026-08-10','tr','Mass-media texts'),
+    c('2026-08-13','tr','Quiz II'),
+    c('2026-08-31','tr','Legal texts'),
+    c('2026-09-03','tr','Legal texts'),
+    c('2026-09-07','tr','Legal texts'),
+    c('2026-09-10','tr','Legal texts'),
+    c('2026-09-14','tr','Legal texts'),
+    c('2026-09-17','tr','Legal texts'),
+    c('2026-09-21','tr','Quiz III'),
+    c('2026-09-24','tr','Audio-visual texts'),
+    c('2026-09-28','tr','Audio-visual texts'),
+    c('2026-10-01','tr','Audio-visual texts'),
+    c('2026-10-05','tr','Audio-visual texts'),
+    c('2026-10-08','tr','Audio-visual texts'),
+    c('2026-10-12','tr','Audio-visual texts'),
+    c('2026-10-15','tr','Quiz IV'),
+    ex('2026-08-30',15.5,18.5,'Midterm Exam — Translation'),
+    ex('2026-10-22',12,15,'Final Exam — Translation'),
+    // ===== RPA 703314 — Tue & Fri 9:30–11:00 · BAB Lab Computer ชั้น 2 =====
+    c('2026-06-23','rpa','Class logistics + automation in business'),
+    c('2026-06-26','rpa','Automation spectrum: RPA, Workflow, AI Agent'),
+    c('2026-06-30','rpa','Choosing processes for RPA & Agentic AI'),
+    c('2026-07-03','rpa','Process design & BPM Lifecycle'),
+    c('2026-07-07','rpa','Intro to UiPath + install Academic Alliance license'),
+    c('2026-07-10','rpa','Recording & basic activities'),
+    c('2026-07-14','rpa','Variables & control flow (low-code)'),
+    c('2026-07-17','rpa','UI automation'),
+    c('2026-07-21','rpa','Excel & data management'),
+    c('2026-07-24','rpa','PDF automation & email automation'),
+    c('2026-07-31','rpa','Error handling, debugging, logging + start Project 1'),
+    c('2026-08-04','rpa','Project 1 — clinic / lab'),
+    c('2026-08-07','rpa','Submit & present Project 1 (UiPath)'),
+    c('2026-08-11','rpa','Build automated Workflow with Make'),
+    c('2026-08-14','rpa','Connect cloud services — Sheets, Gmail, Forms'),
+    c('2026-08-18','rpa','Router, filter, iterator & data transformation'),
+    c('2026-08-21','rpa','Webhooks & HTTP request (no-code)'),
+    c('2026-08-25','rpa','LLM in workflow — classify / extract / summarize'),
+    c('2026-08-28','rpa','Prompting for AI Agent + automated verification'),
+    c('2026-09-01','rpa','Design & build an AI Agent'),
+    c('2026-09-04','rpa','Hybrid automation (RPA + agent) + start Project 2'),
+    c('2026-09-08','rpa','Project 2 — clinic + governance / PDPA'),
+    c('2026-09-11','rpa','Submit & present Project 2 (agentic)'),
+    c('2026-09-15','rpa','Hyperautomation + Gemini Enterprise'),
+    c('2026-09-18','rpa','Tool-selection framework + start Capstone'),
+    c('2026-09-22','rpa','Capstone — clinic / lab'),
+    c('2026-09-25','rpa','Testing & Quality Assurance'),
+    c('2026-09-29','rpa','Present Capstone'),
+    c('2026-10-02','rpa','Course summary + review before exam'),
+    ex('2026-11-01',15.5,18.5,'Final Exam — RPA'),
+    // ===== Essay Writing 001218 — Tue & Fri 14:30–16:00 · HB7703 =====
+    c('2026-06-23','es','Course intro + coupon · U1 L1 Definition & Purpose'),
+    c('2026-06-26','es','U1 L1: Thesis Statement + Focus on Language'),
+    c('2026-06-30','es','U1 L2: Body Paragraphs + Organize Ideas'),
+    c('2026-07-03','es','U1 L3: Introduction + Conclusion + Writing Process'),
+    c('2026-07-07','es','U2 L1: Causal Analysis + Topic (Assign 1: topic)'),
+    c('2026-07-10','es','U2 L2: Thesis & Organize + Topic submission'),
+    c('2026-07-14','es','U2 L3: Outline (Assign 2: Outline essay I)'),
+    c('2026-07-17','es','U2 L4: First Draft — Body Paragraphs'),
+    c('2026-07-21','es','U2 L5: Intro, Conclusion, Title'),
+    c('2026-07-24','es','Outline essay I in class (5%)'),
+    c('2026-07-31','es','U2 L6: Peer-review (Assign 3: First draft I)'),
+    c('2026-08-04','es','L7: Revise & Edit · Timed Writing'),
+    c('2026-08-07','es','First draft prep — essay I (not graded)'),
+    c('2026-08-11','es','Peer-review draft I (Assign 4: Final draft I)'),
+    c('2026-08-14','es','Edit draft I → final (submit Aug 18)'),
+    c('2026-09-01','es','U3 L1: What is an Opinion Essay?'),
+    c('2026-09-04','es','U3 L2: Organization + Selecting Topic'),
+    c('2026-09-08','es','U3 L3: Thesis (Assign I: topic essay II)'),
+    c('2026-09-11','es','U3 L4: Gather/Organize + Topic submission II'),
+    c('2026-09-15','es','U3 L4 cont. + L5 (Assign 2: Outline essay II)'),
+    c('2026-09-18','es','Outline essay II in class (5%)'),
+    c('2026-09-22','es','U3 L6: First Draft + Focus on Language'),
+    c('2026-09-25','es','U3 L7: Connecting Paragraphs (Assign 3: Draft II)'),
+    c('2026-09-29','es','U3: Introducing an outside source'),
+    c('2026-10-02','es','First draft prep — essay II (not graded)'),
+    c('2026-10-06','es','Peer-review draft II (Assign 4: Final draft II)'),
+    c('2026-10-09','es','U3 L9: Revising & Editing'),
+    c('2026-10-16','es','Catch-up'),
+    ex('2026-08-28',8,11,'Midterm Exam — Essay Writing'),
+    ex('2026-10-21',8,11,'Final Exam — Essay Writing'),
+    dl('2026-08-18','Final draft Essay I due (15%)'),
+    dl('2026-10-13','Final draft Essay II due (15%)'),
+    // ===== Holidays & exam-period banners =====
+    hol('2026-07-28','Holiday — H.M. King Rama X Birthday'),
+    hol('2026-07-30','Holiday — Translation class'),
+    hol('2026-10-13','Holiday — Essay class'),
+    dl('2026-08-17','Reading Week for Midterms (17–23 Aug)'),
+    dl('2026-08-24','Midterm Exam Week (24–30 Aug)'),
+    dl('2026-10-19','Final Exam Week (19 Oct – 2 Nov)'),
+  ];
+  return rows.map((r,i)=>({id:Date.now()+i,...r}));
 }
 
 const EV_COLORS={
@@ -1058,16 +1191,13 @@ async function init(){
     settings=sS.exists()?sS.data():{currency:'฿'};
     courseProgress=prS.exists()?(prS.data().tasks||{}):{};
     renderProgressCourses();
-    let evList=evS.exists()?(evS.data().list||[]):[];
-    if(!evS.exists()||evList.length===0){evList=seedSchedule();await fbSet('events',{list:evList});}
-    events=evList;
+    events=evS.exists()?(evS.data().list||[]):[];
+    if(!events.length){events=seedSemester();await fbSet('events',{list:events});}
     document.getElementById('currency-select').value=settings.currency||'฿';
     startListeners();
     hideLoading();
     refreshMonthView();
     renderSchedule();
-    buildColorPicker('color-picker',false);
-    buildColorPicker('m-color-picker',true);
   }catch(e){
     document.getElementById('loading-msg').textContent='Connection error — check Firestore rules';
     setSyncStatus('error','Connection failed');console.error(e);
@@ -1085,7 +1215,7 @@ const fmt=(n)=>`${currency()}${Number(n).toLocaleString('en',{minimumFractionDig
 function monthKey(y,m){return`${y}-${String(m+1).padStart(2,'0')}`;}
 function currentKey(){return monthKey(viewYear,viewMonth);}
 function monthExpenses(y,m){return expenses.filter(e=>e.date?.startsWith(monthKey(y,m)));}
-function isoDate(d){return d.toISOString().slice(0,10);}
+function isoDate(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');return`${y}-${m}-${dd}`;}
 
 const updateDate=()=>{
   document.getElementById('live-date').textContent=
@@ -1306,39 +1436,13 @@ window.jumpToDate=function(){
 window.jumpToToday=function(){
   const t=new Date();
   viewYear=t.getFullYear();viewMonth=t.getMonth();
-  document.getElementById('jump-date').value=t.toISOString().slice(0,10);
+  document.getElementById('jump-date').value=isoDate(t);
   refreshMonthView();
 };
 
 // ══════════════════════════════════════
 //  SCHEDULE
 // ══════════════════════════════════════
-function seedSchedule(){
-  // Recurring weekly classes are rendered directly from WEEKLY_CLASSES in the time-grid.
-  // Firebase only stores one-time events (exams, deadlines, homework).
-  const list=[];
-  const oneTime=[
-    {date:'2026-06-26',time:'14:30',title:'HW Due: Essay Writing U1 L1 pp.1-12 + exercises',color:'indigo'},
-    {date:'2026-07-20',time:'11:00',title:'Quiz I — Translation 001425',color:'blue'},
-    {date:'2026-07-24',time:'14:30',title:'Outline Essay I in class (5%) — Essay Writing 001218',color:'indigo'},
-    {date:'2026-08-07',time:'09:30',title:'Submit Project 1 (RPA/UiPath) — 703314',color:'teal'},
-    {date:'2026-08-13',time:'11:00',title:'Quiz II — Translation 001425',color:'blue'},
-    {date:'2026-08-18',time:'14:30',title:'Final Draft Essay I due (15%) — Essay Writing 001218',color:'indigo'},
-    {date:'2026-08-28',time:'08:00',title:'Midterm Exam — Essay Writing 001218',color:'red'},
-    {date:'2026-08-30',time:'15:30',title:'Midterm Exam — Translation 001425',color:'red'},
-    {date:'2026-09-11',time:'09:30',title:'Submit Project 2 (Agentic) — 703314',color:'teal'},
-    {date:'2026-09-18',time:'14:30',title:'Outline Essay II in class (5%) — Essay Writing 001218',color:'indigo'},
-    {date:'2026-09-21',time:'11:00',title:'Quiz III — Translation 001425',color:'blue'},
-    {date:'2026-09-29',time:'09:30',title:'Capstone Presentation — 703314',color:'teal'},
-    {date:'2026-10-13',time:'14:30',title:'Final Draft Essay II due (15%) — Essay Writing 001218',color:'indigo'},
-    {date:'2026-10-15',time:'11:00',title:'Quiz IV — Translation 001425',color:'blue'},
-    {date:'2026-10-21',time:'08:00',title:'Final Exam — Essay Writing 001218',color:'red'},
-    {date:'2026-10-22',time:'12:00',title:'Final Exam — Translation 001425',color:'red'},
-    {date:'2026-11-01',time:'15:30',title:'Final Exam — RPA 703314',color:'red'},
-  ];
-  oneTime.forEach(t=>list.push({id:Date.now()+Math.random(),...t}));
-  return list;
-}
 
 function buildColorPicker(containerId,isModal){
   const picker=document.getElementById(containerId);
@@ -1372,6 +1476,7 @@ window.switchSchedSubTab=function(name){
   if(name==='list')renderEventList();
 };
 window.changeWeek=function(dir){weekOffset+=dir;renderSchedule();};
+window.goToThisWeek=function(){weekOffset=0;renderSchedule();};
 
 window.renderEventList=function(){
   const search=(document.getElementById('ev-search').value||'').toLowerCase();
@@ -1381,31 +1486,28 @@ window.renderEventList=function(){
   if(filter==='upcoming')evs=evs.filter(e=>e.date>=todayStr);
   else if(filter==='past')evs=evs.filter(e=>e.date<todayStr);
   if(search)evs=evs.filter(e=>e.title.toLowerCase().includes(search));
-  // sort: upcoming ascending, past descending, all ascending
-  evs.sort((a,b)=>{
-    const c=a.date.localeCompare(b.date);
-    return c!==0?c:(a.time||'').localeCompare(b.time||'');
-  });
+  const sk=e=>(e.start==null?'':decToInput(e.start));
+  evs.sort((a,b)=>{const c=a.date.localeCompare(b.date);return c!==0?c:sk(a).localeCompare(sk(b));});
   if(filter==='past')evs.reverse();
   const cont=document.getElementById('event-list');
   if(!evs.length){cont.innerHTML='<div class="empty"><span>📅</span>No events match.</div>';return;}
-  // group by date
   const byDay={};
   evs.forEach(e=>{(byDay[e.date]=byDay[e.date]||[]).push(e);});
-  const dayKeys=Object.keys(byDay);
-  cont.innerHTML=dayKeys.map(dk=>{
+  cont.innerHTML=Object.keys(byDay).map(dk=>{
     const dObj=new Date(dk+'T00:00:00');
     const lbl=dObj.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
     const isToday=dk===todayStr;
-    const rows=byDay[dk].sort((a,b)=>(a.time||'').localeCompare(b.time||'')).map(e=>`
-      <div class="ev-list-item" style="border-left-color:${EV_COLORS[e.color||'green']?.hex||'#888'}">
-        <span class="ev-list-time">${e.time||'—'}</span>
-        <span class="ev-list-title">${e.title}</span>
+    const rows=byDay[dk].sort((a,b)=>sk(a).localeCompare(sk(b))).map(e=>{
+      const cat=CATS[e.cat]||CATS.custom;
+      const tm=e.start!=null?tgFmt(e.start)+(e.end!=null?'–'+tgFmt(e.end):''):'—';
+      return`<div class="ev-list-item" style="border-left-color:${cat.c}">
+        <span class="ev-list-time">${tm}</span>
+        <span class="ev-list-title">${e.title}${e.room?` <span style="color:var(--muted);font-size:.85em">· ${e.room}</span>`:''}</span>
         <div class="ev-list-actions">
           <button class="edit-btn" onclick="openEvModal(${e.id})" title="Edit">✏️</button>
           <button class="del-btn"  onclick="deleteEvent(${e.id})" title="Delete">✕</button>
         </div>
-      </div>`).join('');
+      </div>`;}).join('');
     return `<div class="ev-list-day${isToday?' is-today':''}">${lbl}${isToday?' · Today':''}</div>${rows}`;
   }).join('');
 };
@@ -1413,11 +1515,16 @@ window.renderEventList=function(){
 window.addEvent=async function(){
   const title=document.getElementById('ev-title').value.trim();
   const date=document.getElementById('ev-date').value;
-  const time=document.getElementById('ev-time').value;
-  const color=document.getElementById('ev-color').value||'green';
-  if(!title||!date)return;
-  events.push({id:Date.now(),title,date,time,color});
+  if(!title||!date){alert('Please enter a title and a date.');return;}
+  const cat=document.getElementById('ev-cat').value||'custom';
+  const start=inputToDec(document.getElementById('ev-start').value);
+  const end=inputToDec(document.getElementById('ev-end').value);
+  const room=document.getElementById('ev-room').value.trim();
+  events.push({id:Date.now(),title,date,cat,start,end,room});
   document.getElementById('ev-title').value='';
+  document.getElementById('ev-start').value='';
+  document.getElementById('ev-end').value='';
+  document.getElementById('ev-room').value='';
   await fbSet('events',{list:events});
 };
 window.deleteEvent=async function(id){
@@ -1426,8 +1533,12 @@ window.deleteEvent=async function(id){
   await fbSet('events',{list:events});
 };
 window.clearEvents=async function(){
-  if(!confirm('Clear all events?'))return;
+  if(!confirm('Clear ALL events from the schedule? This cannot be undone.'))return;
   events=[];await fbSet('events',{list:events});
+};
+window.loadSemester=async function(){
+  if(!confirm('Load the full semester schedule from your course PDFs? This replaces all current events.'))return;
+  events=seedSemester();await fbSet('events',{list:events});
 };
 
 // ── EDIT EVENT MODAL ──
@@ -1436,15 +1547,10 @@ window.openEvModal=function(id){
   editingEvId=id;
   document.getElementById('m-ev-title').value=e.title;
   document.getElementById('m-ev-date').value=e.date;
-  document.getElementById('m-ev-time').value=e.time||'';
-  modalSelectedColor=e.color||'green';
-  document.getElementById('m-ev-color').value=modalSelectedColor;
-  // update swatch selection
-  const picker=document.getElementById('m-color-picker');
-  picker.querySelectorAll('.color-swatch').forEach((sw,i)=>{
-    const key=Object.keys(EV_COLORS)[i];
-    sw.classList.toggle('selected',key===modalSelectedColor);
-  });
+  document.getElementById('m-ev-cat').value=e.cat||'custom';
+  document.getElementById('m-ev-start').value=decToInput(e.start);
+  document.getElementById('m-ev-end').value=decToInput(e.end);
+  document.getElementById('m-ev-room').value=e.room||'';
   document.getElementById('ev-modal').classList.remove('hidden');
 };
 window.closeEvModal=function(){
@@ -1454,12 +1560,16 @@ window.closeEvModal=function(){
 window.saveEvEdit=async function(){
   if(!editingEvId)return;
   const idx=events.findIndex(x=>x.id===editingEvId);if(idx===-1)return;
+  const title=document.getElementById('m-ev-title').value.trim();
+  if(!title){alert('Title cannot be empty.');return;}
   events[idx]={
     ...events[idx],
-    title:document.getElementById('m-ev-title').value.trim(),
+    title,
     date:document.getElementById('m-ev-date').value,
-    time:document.getElementById('m-ev-time').value,
-    color:document.getElementById('m-ev-color').value||'green'
+    cat:document.getElementById('m-ev-cat').value||'custom',
+    start:inputToDec(document.getElementById('m-ev-start').value),
+    end:inputToDec(document.getElementById('m-ev-end').value),
+    room:document.getElementById('m-ev-room').value.trim()
   };
   closeEvModal();
   await fbSet('events',{list:events});
@@ -1510,7 +1620,7 @@ function renderSchedule(){
   }
   grid.appendChild(g);
 
-  // 7 day columns
+  // 7 day columns — everything comes from `events` (fully editable)
   days.forEach((d,i)=>{
     const ds=isoDate(d),isToday=ds===todayStr,wknd=i>=5;
     const col=document.createElement('div');
@@ -1518,95 +1628,49 @@ function renderSchedule(){
     col.style.height=TG_H+'px';
     col.dataset.label=DAY_NAMES[i]+' '+d.getDate();
 
-    // recurring weekly classes + deadline badges from COURSE_TASKS
-    const classesThisDay=WEEKLY_CLASSES.filter(c=>c.day===i+1&&ds<=SEMESTER_END);
-    const clsSetThisDay=new Set(classesThisDay.map(c=>c.cls));
-    classesThisDay.forEach(c=>{
+    const dayEvs=events.filter(e=>e.date===ds);
+    // timed events fully inside the grid window → positioned blocks
+    const inGrid=dayEvs.filter(e=>e.start!=null&&e.start>=TG_START&&e.start<TG_END)
+                       .sort((a,b)=>a.start-b.start);
+    // untimed or out-of-window events → top chips (with their time, if any)
+    const chips=dayEvs.filter(e=>!(e.start!=null&&e.start>=TG_START&&e.start<TG_END));
+
+    inGrid.forEach(e=>{
+      const cat=CATS[e.cat]||CATS.custom;
+      const endH=(e.end!=null&&e.end>e.start)?Math.min(e.end,TG_END):e.start+0.75;
       const ev=document.createElement('div');
-      ev.className='tg-ev tg-'+c.cls;
-      ev.style.top=((c.start-TG_START)*TG_PX)+'px';
-      ev.style.height=((c.end-c.start)*TG_PX)+'px';
-      // find deadlines from COURSE_TASKS for this course on this day
-      const dlBadges=[];
-      COURSE_TASKS.forEach(ct=>{
-        if(CLS_MAP[ct.id]===c.cls){
-          ct.tasks.forEach(t=>{
-            if(t.date===ds){
-              const done=courseProgress[t.id];
-              dlBadges.push(`<div class="tg-dl-badge${done?' done':''}">${t.graded?'📝':t.urgent?'⚡':'📌'} ${t.label}</div>`);
-            }
-          });
-        }
-      });
-      ev.innerHTML=`<div class="tg-et">${tgFmt(c.start)}–${tgFmt(c.end)}</div><div class="tg-en">${c.name}</div><div class="tg-er">${c.room}</div>${dlBadges.join('')}`;
-      col.appendChild(ev);
-    });
-
-    // non-class deadlines (COURSE_TASKS tasks on this day with no matching class)
-    const nonClsDl=[];
-    COURSE_TASKS.forEach(ct=>{
-      const cls=CLS_MAP[ct.id];
-      ct.tasks.forEach(t=>{
-        if(t.date===ds&&!clsSetThisDay.has(cls)){
-          nonClsDl.push({cls,label:t.label,graded:t.graded,urgent:t.urgent,done:!!courseProgress[t.id]});
-        }
-      });
-    });
-
-    // Firebase custom events (skip anything already shown via COURSE_TASKS)
-    const dayEvs=events.filter(e=>e.date===ds&&!isCourseTaskEvent(e)).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
-    const timedEvs=dayEvs.filter(e=>e.time);
-    const untimedEvs=dayEvs.filter(e=>!e.time);
-
-    timedEvs.forEach(e=>{
-      const h=tgTimeH(e.time);
-      if(h===null)return;
-      const clr=EV_COLORS[e.color||'green'];
-      const ev=document.createElement('div');
-      ev.className='tg-ev tg-user';
-      ev.style.borderLeftColor=clr?.hex||'var(--muted)';
-      ev.style.background=(clr?.hex||'#888')+'28';
-      const inRange=h>=TG_START&&h<TG_END;
-      ev.style.top=(inRange?(h-TG_START)*TG_PX:4)+'px';
-      ev.style.height=TG_PX*0.75+'px';
-      ev.innerHTML=`<div class="tg-et" style="color:${clr?.hex||'var(--muted)'}">${e.time}</div><div class="tg-en">${e.title}</div>
+      ev.className='tg-ev tg-'+(CATS[e.cat]?e.cat:'custom');
+      ev.style.top=((e.start-TG_START)*TG_PX)+'px';
+      ev.style.height=Math.max((endH-e.start)*TG_PX,26)+'px';
+      ev.onclick=(ev2)=>{if(!ev2.target.closest('.tg-actions'))openEvModal(e.id);};
+      const tl=e.end!=null?`${tgFmt(e.start)}–${tgFmt(e.end)}`:tgFmt(e.start);
+      ev.innerHTML=`<div class="tg-et">${tl}</div><div class="tg-en">${e.title}</div>${e.room?`<div class="tg-er">${e.room}</div>`:''}
         <div class="tg-actions">
-          <button class="ev-edit-btn" onclick="openEvModal(${e.id})">✏️</button>
-          <button class="ev-del-btn" onclick="deleteEvent(${e.id})">✕</button>
+          <button class="ev-edit-btn" onclick="openEvModal(${e.id})" title="Edit">✏️</button>
+          <button class="ev-del-btn" onclick="deleteEvent(${e.id})" title="Delete">✕</button>
         </div>`;
       col.appendChild(ev);
     });
 
-    // top chips: non-class deadlines + untimed Firebase events
-    const allTopChips=[...nonClsDl.map(d=>({type:'dl',d})),...untimedEvs.map(e=>({type:'ev',e}))];
-    if(allTopChips.length){
+    if(chips.length){
       const wrap=document.createElement('div');
       wrap.className='tg-top-chips';
-      allTopChips.forEach(item=>{
+      chips.sort((a,b)=>((a.start??99)-(b.start??99))).forEach(e=>{
         const chip=document.createElement('div');
-        if(item.type==='dl'){
-          const d=item.d;
-          chip.className=`tg-chip tg-${d.cls}${d.done?' done':''}`;
-          chip.innerHTML=`${d.graded?'📝 ':d.urgent?'⚡ ':'📌 '}<span>${d.label}</span>`;
-        }else{
-          const e=item.e;
-          const clr=EV_COLORS[e.color||'green'];
-          chip.className='tg-chip';
-          chip.style.borderLeftColor=clr?.hex||'var(--muted)';
-          chip.style.background=(clr?.hex||'#888')+'20';
-          chip.innerHTML=`<span>${e.title}</span>
-            <div class="tg-actions">
-              <button class="ev-edit-btn" onclick="openEvModal(${e.id})">✏️</button>
-              <button class="ev-del-btn" onclick="deleteEvent(${e.id})">✕</button>
-            </div>`;
-        }
+        chip.className='tg-chip tg-'+(CATS[e.cat]?e.cat:'custom');
+        chip.onclick=(ev2)=>{if(!ev2.target.closest('.tg-actions'))openEvModal(e.id);};
+        const tm=e.start!=null?`<span class="tg-ct">${tgFmt(e.start)}${e.end!=null?'–'+tgFmt(e.end):''}</span> `:'';
+        chip.innerHTML=`${tm}<span>${e.title}</span>
+          <div class="tg-actions">
+            <button class="ev-edit-btn" onclick="openEvModal(${e.id})" title="Edit">✏️</button>
+            <button class="ev-del-btn" onclick="deleteEvent(${e.id})" title="Delete">✕</button>
+          </div>`;
         wrap.appendChild(chip);
       });
       col.appendChild(wrap);
     }
 
-    const hasClasses=WEEKLY_CLASSES.some(c=>c.day===i+1);
-    if(!hasClasses&&!dayEvs.length&&!nonClsDl.length&&!wknd){
+    if(!dayEvs.length&&!wknd){
       const f=document.createElement('div');f.className='tg-freeday';
       f.innerHTML='No classes<br>· focus day ·';col.appendChild(f);
     }
@@ -1640,8 +1704,8 @@ function renderSchedOverview(){
     const[y,m]=k.split('-').map(Number);
     const mEvs=events.filter(e=>e.date?.startsWith(k));
     const isCur=k===monthKey(now.getFullYear(),now.getMonth());
-    const pips=[...new Set(mEvs.map(e=>e.color||'green'))].slice(0,8)
-      .map(c=>`<div class="sched-pip" style="background:${EV_COLORS[c]?.hex||'#888'}"></div>`).join('');
+    const pips=[...new Set(mEvs.map(e=>e.cat||'custom'))].slice(0,8)
+      .map(c=>`<div class="sched-pip" style="background:${CATS[c]?.c||'#888'}"></div>`).join('');
     return`<div class="sched-month-card${isCur?' current-month':''}" onclick="jumpToWeekOfMonth('${k}')">
       <div class="sched-month-card-name">${MONTHS[m-1]} <span style="color:var(--muted);font-size:.8rem">${y}</span></div>
       <div class="sched-month-card-count">${mEvs.length}</div>
@@ -1677,9 +1741,9 @@ window.jumpToWeekOfMonth=function(key){
   switchSchedSubTab('week');renderSchedule();
 };
 
-document.getElementById('ev-date').value=now.toISOString().slice(0,10);
-document.getElementById('exp-date').value=now.toISOString().slice(0,10);
-document.getElementById('jump-date').value=now.toISOString().slice(0,10);
+document.getElementById('ev-date').value=isoDate(now);
+document.getElementById('exp-date').value=isoDate(now);
+document.getElementById('jump-date').value=isoDate(now);
 init();
 </script>
 </body>
